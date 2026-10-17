@@ -1,15 +1,13 @@
-export enum tagtypes {
-    user = "user",
-    auth = "auth",
-    product = "product",
-    order = "order",
-
+export enum TagTypes {
+  user = "user",
+  auth = "auth",
+  product = "product",
+  order = "order",
 }
 
-export const tagtypeList = [
-    tagtypes.user,
-    tagtypes.auth,
-    tagtypes.product,
-    tagtypes.order,
-
+export const tagTypeList = [
+  TagTypes.user,
+  TagTypes.auth,
+  TagTypes.product,
+  TagTypes.order,
 ];

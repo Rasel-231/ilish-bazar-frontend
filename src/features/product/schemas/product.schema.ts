@@ -28,5 +28,5 @@ export const listProductsQuerySchema = z.object({
   sortOrder: z.enum(["asc", "desc"]).optional(),
 });
 
-export type TCreateProductSchema = z.infer<typeof createProductSchema>;
-export type TUpdateProductSchema = z.infer<typeof updateProductSchema>;
+export type CreateProductSchema = z.infer<typeof createProductSchema>;
+export type UpdateProductSchema = z.infer<typeof updateProductSchema>;

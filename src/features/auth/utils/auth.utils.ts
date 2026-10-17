@@ -1,8 +1,8 @@
-import type { TUserRole } from "@/types/common.types";
+import type { UserRole } from "@/types/common.types";
 
-export const isAdmin = (role?: TUserRole | null) => role === "ADMIN";
+export const isAdmin = (role?: UserRole | null) => role === "ADMIN";
 
-export const getRoleLabel = (role?: TUserRole | null) =>
+export const getRoleLabel = (role?: UserRole | null) =>
   role === "ADMIN" ? "Administrator" : "Customer";
 
 export const getPostLoginRedirect = (redirect?: string | null) => {

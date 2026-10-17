@@ -1,50 +1,54 @@
-import type { IApiResponse, IPaginationQuery } from "@/types/common.types";
+import type {
+  ApiResponse,
+  PaginationQuery,
+  UserRole,
+} from "@/types/common.types";
 
-export interface IAuthTokens {
+export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
 }
 
-export interface IAuthUser {
+export interface AuthUser {
   id: string;
   email: string;
   name: string;
-  role: "USER" | "ADMIN";
+  role: UserRole;
   isActive: boolean;
   avatarUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ILoginPayload {
+export interface LoginPayload {
   email: string;
   password: string;
 }
 
-export interface IRegisterPayload {
+export interface RegisterPayload {
   name: string;
   email: string;
   password: string;
 }
 
-export interface IChangePasswordPayload {
+export interface ChangePasswordPayload {
   oldPassword: string;
   newPassword: string;
 }
 
-export interface IForgotPasswordPayload {
+export interface ForgotPasswordPayload {
   email: string;
 }
 
-export interface IResetPasswordPayload {
+export interface ResetPasswordPayload {
   token: string;
   newPassword: string;
 }
 
-export interface IListUsersQuery extends IPaginationQuery {
-  role?: "USER" | "ADMIN";
+export interface ListUsersQuery extends PaginationQuery {
+  role?: UserRole;
   isActive?: boolean;
 }
 
-export type TLoginResponse = IApiResponse<IAuthTokens>;
-export type TAuthUserResponse = IApiResponse<IAuthUser>;
+export type LoginResponse = ApiResponse<AuthTokens>;
+export type AuthUserResponse = ApiResponse<AuthUser>;

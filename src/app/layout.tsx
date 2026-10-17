@@ -6,9 +6,9 @@ import "@fontsource/hind-siliguri/bengali-600.css";
 import "@fontsource/hind-siliguri/bengali-700.css";
 import "./globals.css";
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
-import { ReduxProvider } from "@/redux/providers/ReduxProvider";
+import { ReduxProvider } from "@/redux/providers/redux-provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

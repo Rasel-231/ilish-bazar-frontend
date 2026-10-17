@@ -4,7 +4,7 @@
 :root {
   --radius: 0.75rem;
 
-  --background: #fbfaf7;
+  --background: #ffffff;
   --foreground: #14212e;
   --card: #ffffff;
   --card-foreground: #14212e;
@@ -28,6 +28,12 @@
   --navy: #0b2540;
   --success: #1e8e5a;
   --warning: #b9770e;
+
+  /* Marketplace surfaces: warm canvas + soft fish-art backdrops. */
+  --canvas: #fbf7f1;
+  --art-blue: #e4f0f7;
+  --art-yellow: #fbf2d8;
+  --art-green: #e7f4ea;
 }
 
 @theme inline {
@@ -52,6 +58,10 @@
   --color-navy: var(--navy);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-canvas: var(--canvas);
+  --color-art-blue: var(--art-blue);
+  --color-art-yellow: var(--art-yellow);
+  --color-art-green: var(--art-green);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -73,6 +83,29 @@
     }
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  /* Autoplay indicator for the homepage hero carousel. Duration is set inline. */
+  --animate-hero-progress: hero-progress 1s linear forwards;
+  @keyframes hero-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Gentle bob for the floating WhatsApp button. */
+  --animate-whatsapp-float: whatsapp-float 2.6s ease-in-out infinite;
+  @keyframes whatsapp-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
     }
   }
 }

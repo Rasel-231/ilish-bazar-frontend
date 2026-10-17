@@ -1,18 +1,26 @@
-import { Container } from "@/components/shared/container";
+import { CustomerReviews } from "@/features/home/customer-reviews/customer-reviews";
+import { GhatSourceSection } from "@/features/home/ghat-source/ghat-source-section";
+import { HeroCarousel } from "@/features/home/hero-carousel";
+import { HowToOrder } from "@/features/home/how-to-order/how-to-order";
+import { CategorySection } from "@/features/home/ilish-category/ilish-category";
+import { IlishShowcase } from "@/features/home/ilish-showcase";
+import { TodaysFreshIlish } from "@/features/home/todays-ilish/todays-fresh-ilish";
+import { VideoShowcase } from "@/features/home/video-showcase/video-showcase";
 
 export default function HomePage() {
   return (
-    <Container className="flex flex-1 flex-col items-center justify-center gap-6 py-24 text-center">
-      <span className="rounded-full border border-foreground/15 px-3 py-1 text-xs font-medium text-foreground/70">
-        Fresh from the river
-      </span>
-      <h1 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-        The freshest hilsa, delivered to your door.
+    <div className="flex flex-1 flex-col">
+      <h1 className="sr-only">
+        ইলিশ বাজার — নদীর তাজা ইলিশ, সরাসরি জেলে ও আড়ত থেকে আপনার ঘরে
       </h1>
-      <p className="max-w-xl text-base text-foreground/60">
-        Browse our catalog, place an order, and get premium ilish bazar quality
-        without leaving home.
-      </p>
-    </Container>
+      <HeroCarousel />
+      <CategorySection />
+      <IlishShowcase />
+      <TodaysFreshIlish />
+      <GhatSourceSection />
+      <HowToOrder />
+      <VideoShowcase />
+      <CustomerReviews />
+    </div>
   );
 }

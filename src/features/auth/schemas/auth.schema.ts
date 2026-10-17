@@ -34,5 +34,5 @@ export const resetPasswordSchema = z.object({
     .max(100),
 });
 
-export type TLoginSchema = z.infer<typeof loginSchema>;
-export type TRegisterSchema = z.infer<typeof registerSchema>;
+export type LoginSchema = z.infer<typeof loginSchema>;
+export type RegisterSchema = z.infer<typeof registerSchema>;

@@ -41,4 +41,4 @@ export const listOrdersQuerySchema = z.object({
   sortOrder: z.enum(["asc", "desc"]).optional(),
 });
 
-export type TCreateOrderSchema = z.infer<typeof createOrderSchema>;
+export type CreateOrderSchema = z.infer<typeof createOrderSchema>;

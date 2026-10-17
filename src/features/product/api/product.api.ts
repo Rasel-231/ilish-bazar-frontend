@@ -1,47 +1,47 @@
-import { baseApi } from "@/redux/baseApi/baseApi";
-import type { IApiResponse, IPaginatedList } from "@/types/common.types";
+import { baseApi } from "@/redux/api/base-api";
+import { TagTypes } from "@/redux/types/tag-types";
+import type { ApiResponse, PaginatedList } from "@/types/common.types";
 
 import type {
-  ICreateProductPayload,
-  IListProductsQuery,
-  IProduct,
-  IUpdateProductPayload,
+  CreateProductPayload,
+  ListProductsQuery,
+  Product,
+  UpdateProductPayload,
 } from "../types/product.types";
 
-export const productsApi = baseApi.injectEndpoints({
+export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query<
-      IPaginatedList<IProduct>,
-      IListProductsQuery | void
+      PaginatedList<Product>,
+      ListProductsQuery | void
     >({
       query: (params) => ({ url: "/catalog", params: params ?? undefined }),
-      providesTags: ["Product"],
+      providesTags: [TagTypes.product],
     }),
-    getProductById: builder.query<IApiResponse<IProduct>, string>({
+    getProductById: builder.query<ApiResponse<Product>, string>({
       query: (id) => ({ url: `/catalog/${id}` }),
-      providesTags: ["Product"],
+      providesTags: [TagTypes.product],
     }),
-    createProduct: builder.mutation<
-      IApiResponse<IProduct>,
-      ICreateProductPayload
-    >({
-      query: (body) => ({ url: "/catalog", method: "POST", data: body }),
-      invalidatesTags: ["Product"],
-    }),
+    createProduct: builder.mutation<ApiResponse<Product>, CreateProductPayload>(
+      {
+        query: (body) => ({ url: "/catalog", method: "POST", data: body }),
+        invalidatesTags: [TagTypes.product],
+      },
+    ),
     updateProduct: builder.mutation<
-      IApiResponse<IProduct>,
-      { id: string; body: IUpdateProductPayload }
+      ApiResponse<Product>,
+      { id: string; body: UpdateProductPayload }
     >({
       query: ({ id, body }) => ({
         url: `/catalog/${id}`,
         method: "PATCH",
         data: body,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: [TagTypes.product],
     }),
-    deleteProduct: builder.mutation<IApiResponse<null>, string>({
+    deleteProduct: builder.mutation<ApiResponse<null>, string>({
       query: (id) => ({ url: `/catalog/${id}`, method: "DELETE" }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: [TagTypes.product],
     }),
   }),
 });
@@ -52,4 +52,4 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
-} = productsApi;
+} = productApi;

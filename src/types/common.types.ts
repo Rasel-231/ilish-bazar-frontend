@@ -1,8 +1,8 @@
-export type TSortOrder = "asc" | "desc";
+export type SortOrder = "asc" | "desc";
 
-export type TUserRole = "USER" | "ADMIN";
+export type UserRole = "USER" | "ADMIN";
 
-export type TOrderStatus =
+export type OrderStatus =
   | "PENDING"
   | "CONFIRMED"
   | "PROCESSING"
@@ -10,46 +10,46 @@ export type TOrderStatus =
   | "DELIVERED"
   | "CANCELLED";
 
-export type TPaymentStatus = "PENDING" | "PAID" | "FAILED" | "REFUNDED";
+export type PaymentStatus = "PENDING" | "PAID" | "FAILED" | "REFUNDED";
 
-export type TPaymentMethod = "COD" | "SSLCOMMERZ" | "BKASH" | "NAGAD" | "STRIPE";
+export type PaymentMethod = "COD" | "SSLCOMMERZ" | "BKASH" | "NAGAD" | "STRIPE";
 
-export type TProductUnit = "KG" | "GRAM" | "PIECE" | "DOZEN";
+export type ProductUnit = "KG" | "GRAM" | "PIECE" | "DOZEN";
 
-export interface IMeta {
+export interface Meta {
   page: number;
   limit: number;
   total: number;
 }
 
-export interface IPaginationQuery {
+export interface PaginationQuery {
   page?: number;
   limit?: number;
   sortBy?: string;
-  sortOrder?: TSortOrder;
+  sortOrder?: SortOrder;
   searchTerm?: string;
 }
 
-export interface IApiResponse<T> {
+export interface ApiResponse<T> {
   success: boolean;
   message: string;
   data?: T;
-  meta?: IMeta;
+  meta?: Meta;
 }
 
-export interface IGenericErrorDetail {
+export interface GenericErrorDetail {
   path: string | number;
   message: string;
 }
 
-export interface IApiError {
+export interface ApiError {
   success: false;
   message: string;
   statusCode?: number;
-  errorDetails?: IGenericErrorDetail[];
+  errorDetails?: GenericErrorDetail[];
 }
 
-export interface IPaginatedList<T> {
+export interface PaginatedList<T> {
   data: T[];
-  meta: IMeta;
+  meta: Meta;
 }

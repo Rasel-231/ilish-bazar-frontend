@@ -1,15 +1,14 @@
-
-import { baseApi } from "@/redux/baseApi/baseApi";
-import { tagtypes } from "@/redux/types/tagTypes";
-import type { IApiResponse } from "@/types/common.types";
+import { baseApi } from "@/redux/api/base-api";
+import { TagTypes } from "@/redux/types/tag-types";
+import type { ApiResponse } from "@/types/common.types";
 
 import type {
-  IAuthTokens,
-  IChangePasswordPayload,
-  IForgotPasswordPayload,
-  ILoginPayload,
-  IResetPasswordPayload,
-  TLoginResponse,
+  AuthTokens,
+  ChangePasswordPayload,
+  ForgotPasswordPayload,
+  LoginPayload,
+  LoginResponse,
+  ResetPasswordPayload,
 } from "../types/auth.types";
 
 const AUTH_URL = "/auth";
@@ -18,18 +17,16 @@ export const authApi = baseApi.injectEndpoints({
   overrideExisting: false,
 
   endpoints: (builder) => ({
-    // Login
-    login: builder.mutation<IApiResponse<IAuthTokens>, ILoginPayload>({
+    login: builder.mutation<ApiResponse<AuthTokens>, LoginPayload>({
       query: (body) => ({
         url: `${AUTH_URL}/login`,
         method: "POST",
         data: body,
       }),
-      invalidatesTags: [tagtypes.user],
+      invalidatesTags: [TagTypes.user],
     }),
 
-    // Logout
-    logout: builder.mutation<IApiResponse<null>, void>({
+    logout: builder.mutation<ApiResponse<null>, void>({
       query: () => ({
         url: `${AUTH_URL}/logout`,
         method: "POST",
@@ -45,18 +42,16 @@ export const authApi = baseApi.injectEndpoints({
       },
     }),
 
-    // Refresh access token
-    refreshToken: builder.mutation<TLoginResponse, void>({
+    refreshToken: builder.mutation<LoginResponse, void>({
       query: () => ({
         url: `${AUTH_URL}/refresh-token`,
         method: "POST",
       }),
     }),
 
-    // Change password
     changePassword: builder.mutation<
-      IApiResponse<null>,
-      IChangePasswordPayload
+      ApiResponse<null>,
+      ChangePasswordPayload
     >({
       query: (body) => ({
         url: `${AUTH_URL}/change-password`,
@@ -65,10 +60,9 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    // Forgot password
     forgotPassword: builder.mutation<
-      IApiResponse<null>,
-      IForgotPasswordPayload
+      ApiResponse<null>,
+      ForgotPasswordPayload
     >({
       query: (body) => ({
         url: `${AUTH_URL}/forgot-password`,
@@ -77,11 +71,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    // Reset password
-    resetPassword: builder.mutation<
-      IApiResponse<null>,
-      IResetPasswordPayload
-    >({
+    resetPassword: builder.mutation<ApiResponse<null>, ResetPasswordPayload>({
       query: (body) => ({
         url: `${AUTH_URL}/reset-password`,
         method: "POST",

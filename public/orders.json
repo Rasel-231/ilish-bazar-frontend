@@ -1,0 +1,240 @@
+{
+  "success": true,
+  "message": "Orders fetched successfully",
+  "meta": { "page": 1, "limit": 20, "total": 5 },
+  "data": [
+    {
+      "id": "ord_1042",
+      "orderNumber": "IB-2026-1042",
+      "userId": "usr_001",
+      "status": "DELIVERED",
+      "paymentStatus": "PAID",
+      "paymentMethod": "COD",
+      "subtotal": 4950,
+      "shippingFee": 0,
+      "totalAmount": 4950,
+      "shippingAddress": "বাসা ১২, রোড ৫, ধানমন্ডি, ঢাকা-১২০৯",
+      "phone": "01711-000000",
+      "note": "মাছ ভালোভাবে পরিষ্কার করে দিবেন।",
+      "createdAt": "2026-10-12T09:24:00.000Z",
+      "updatedAt": "2026-10-13T16:10:00.000Z",
+      "user": {
+        "id": "usr_001",
+        "name": "রাফিদ হাসান",
+        "email": "rafid@example.com",
+        "role": "USER",
+        "avatarUrl": null
+      },
+      "items": [
+        {
+          "id": "itm_1",
+          "orderId": "ord_1042",
+          "productId": "prd_1",
+          "productName": "চাঁদপুরের বড় ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "chandpur-ilish-1kg-plus",
+          "unitPrice": 2250,
+          "quantity": 1,
+          "lineTotal": 2250,
+          "createdAt": "2026-10-12T09:24:00.000Z"
+        },
+        {
+          "id": "itm_2",
+          "orderId": "ord_1042",
+          "productId": "prd_2",
+          "productName": "মাওয়ার ইলিশ (১ কেজি)",
+          "productImage": "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "mawa-ilish",
+          "unitPrice": 1650,
+          "quantity": 1,
+          "lineTotal": 1650,
+          "createdAt": "2026-10-12T09:24:00.000Z"
+        },
+        {
+          "id": "itm_3",
+          "orderId": "ord_1042",
+          "productId": "prd_3",
+          "productName": "বরিশালের ইলিশ (৫০০ গ্রাম)",
+          "productImage": "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "barishal-ilish",
+          "unitPrice": 1050,
+          "quantity": 1,
+          "lineTotal": 1050,
+          "createdAt": "2026-10-12T09:24:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ord_1039",
+      "orderNumber": "IB-2026-1039",
+      "userId": "usr_001",
+      "status": "SHIPPED",
+      "paymentStatus": "PAID",
+      "paymentMethod": "BKASH",
+      "subtotal": 4400,
+      "shippingFee": 120,
+      "totalAmount": 4520,
+      "shippingAddress": "বাসা ১২, রোড ৫, ধানমন্ডি, ঢাকা-১২০৯",
+      "phone": "01711-000000",
+      "note": null,
+      "createdAt": "2026-10-15T06:40:00.000Z",
+      "updatedAt": "2026-10-16T03:12:00.000Z",
+      "user": {
+        "id": "usr_001",
+        "name": "রাফিদ হাসান",
+        "email": "rafid@example.com",
+        "role": "USER",
+        "avatarUrl": null
+      },
+      "items": [
+        {
+          "id": "itm_4",
+          "orderId": "ord_1039",
+          "productId": "prd_4",
+          "productName": "পদ্মার বড় ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "padma-ilish-1200",
+          "unitPrice": 2600,
+          "quantity": 1,
+          "lineTotal": 2600,
+          "createdAt": "2026-10-15T06:40:00.000Z"
+        },
+        {
+          "id": "itm_5",
+          "orderId": "ord_1039",
+          "productId": "prd_5",
+          "productName": "ফ্যামিলি প্যাক ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "family-pack-ilish",
+          "unitPrice": 1800,
+          "quantity": 1,
+          "lineTotal": 1800,
+          "createdAt": "2026-10-15T06:40:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ord_1035",
+      "orderNumber": "IB-2026-1035",
+      "userId": "usr_001",
+      "status": "PROCESSING",
+      "paymentStatus": "PAID",
+      "paymentMethod": "NAGAD",
+      "subtotal": 3700,
+      "shippingFee": 120,
+      "totalAmount": 3820,
+      "shippingAddress": "বাসা ১২, রোড ৫, ধানমন্ডি, ঢাকা-১২০৯",
+      "phone": "01711-000000",
+      "note": "ডেলিভারির আগে ফোন দিয়ে আসবেন।",
+      "createdAt": "2026-10-14T11:05:00.000Z",
+      "updatedAt": "2026-10-15T02:30:00.000Z",
+      "user": {
+        "id": "usr_001",
+        "name": "রাফিদ হাসান",
+        "email": "rafid@example.com",
+        "role": "USER",
+        "avatarUrl": null
+      },
+      "items": [
+        {
+          "id": "itm_6",
+          "orderId": "ord_1035",
+          "productId": "prd_6",
+          "productName": "চাঁদপুরের প্রিমিয়াম ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "premium-chandpur-ilish",
+          "unitPrice": 2450,
+          "quantity": 1,
+          "lineTotal": 2450,
+          "createdAt": "2026-10-14T11:05:00.000Z"
+        },
+        {
+          "id": "itm_7",
+          "orderId": "ord_1035",
+          "productId": "prd_7",
+          "productName": "উপকূলের তাজা ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "coastal-fresh-ilish",
+          "unitPrice": 1250,
+          "quantity": 1,
+          "lineTotal": 1250,
+          "createdAt": "2026-10-14T11:05:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ord_1031",
+      "orderNumber": "IB-2026-1031",
+      "userId": "usr_001",
+      "status": "PENDING",
+      "paymentStatus": "PENDING",
+      "paymentMethod": "COD",
+      "subtotal": 1750,
+      "shippingFee": 120,
+      "totalAmount": 1870,
+      "shippingAddress": "বাসা ১২, রোড ৫, ধানমন্ডি, ঢাকা-১২০৯",
+      "phone": "01711-000000",
+      "note": null,
+      "createdAt": "2026-10-16T05:15:00.000Z",
+      "updatedAt": "2026-10-16T05:15:00.000Z",
+      "user": {
+        "id": "usr_001",
+        "name": "রাফিদ হাসান",
+        "email": "rafid@example.com",
+        "role": "USER",
+        "avatarUrl": null
+      },
+      "items": [
+        {
+          "id": "itm_8",
+          "orderId": "ord_1031",
+          "productId": "prd_8",
+          "productName": "বরিশালের ইলিশ",
+          "productImage": "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "barishal-ilish",
+          "unitPrice": 1750,
+          "quantity": 1,
+          "lineTotal": 1750,
+          "createdAt": "2026-10-16T05:15:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ord_1028",
+      "orderNumber": "IB-2026-1028",
+      "userId": "usr_001",
+      "status": "CANCELLED",
+      "paymentStatus": "REFUNDED",
+      "paymentMethod": "SSLCOMMERZ",
+      "subtotal": 2650,
+      "shippingFee": 120,
+      "totalAmount": 2770,
+      "shippingAddress": "বাসা ১২, রোড ৫, ধানমন্ডি, ঢাকা-১২০৯",
+      "phone": "01711-000000",
+      "note": "ভুল করে অর্ডার করেছিলাম।",
+      "createdAt": "2026-10-11T14:20:00.000Z",
+      "updatedAt": "2026-10-11T15:05:00.000Z",
+      "user": {
+        "id": "usr_001",
+        "name": "রাফিদ হাসান",
+        "email": "rafid@example.com",
+        "role": "USER",
+        "avatarUrl": null
+      },
+      "items": [
+        {
+          "id": "itm_9",
+          "orderId": "ord_1028",
+          "productId": "prd_9",
+          "productName": "ছোট সাইজের ইলিশ (২ পিস)",
+          "productImage": "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=400",
+          "productSlug": "small-size-ilish",
+          "unitPrice": 1250,
+          "quantity": 2,
+          "lineTotal": 2500,
+          "createdAt": "2026-10-11T14:20:00.000Z"
+        }
+      ]
+    }
+  ]
+}

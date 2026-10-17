@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export default function Error({
+export default function RootError({
   error,
   retry,
 }: {

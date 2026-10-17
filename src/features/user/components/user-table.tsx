@@ -1,10 +1,14 @@
 import { EmptyState } from "@/components/feedback/empty-state";
 import { getInitials } from "@/lib/utils";
 
-import type { IUser } from "../types/user.types";
+import type { User } from "../types/user.types";
 import { getUserDisplayName } from "../utils/user.utils";
 
-export function UserTable({ users }: { users: IUser[] }) {
+type UserTableProps = {
+  users: User[];
+};
+
+export function UserTable({ users }: UserTableProps) {
   if (users.length === 0) {
     return (
       <EmptyState

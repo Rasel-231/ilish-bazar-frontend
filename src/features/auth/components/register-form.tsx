@@ -6,7 +6,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRegisterMutation } from "@/features/users/api/usersApi";
+import { useRegisterMutation } from "@/features/user/api/user.api";
 import { getErrorMessage, zodFieldErrors } from "@/lib/utils";
 
 import { registerSchema } from "../schemas/auth.schema";

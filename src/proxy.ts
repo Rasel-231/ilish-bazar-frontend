@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function proxy(request: NextRequest) {
-  console.log('PROXY HIT 👉', request.nextUrl.pathname)
-
   const token = request.cookies.get('accessToken')?.value
 
   if (!token) {
@@ -17,6 +15,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/dashboard/:path*',
+    '/dashb/:path*',
   ],
 }

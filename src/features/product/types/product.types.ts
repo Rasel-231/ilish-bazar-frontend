@@ -1,15 +1,12 @@
-import type {
-  IPaginationQuery,
-  TProductUnit,
-} from "@/types/common.types";
+import type { PaginationQuery, ProductUnit } from "@/types/common.types";
 
-export interface IProduct {
+export interface Product {
   id: string;
   name: string;
   description?: string | null;
   price: number | string;
   stock: number;
-  unit: TProductUnit;
+  unit: ProductUnit;
   imageUrl?: string | null;
   category?: string | null;
   isActive: boolean;
@@ -18,19 +15,19 @@ export interface IProduct {
   updatedAt: string;
 }
 
-export interface ICreateProductPayload {
+export interface CreateProductPayload {
   name: string;
   description?: string;
   price: number;
   stock?: number;
-  unit?: TProductUnit;
+  unit?: ProductUnit;
   category?: string;
   isActive?: boolean;
 }
 
-export type IUpdateProductPayload = Partial<ICreateProductPayload>;
+export type UpdateProductPayload = Partial<CreateProductPayload>;
 
-export interface IListProductsQuery extends IPaginationQuery {
+export interface ListProductsQuery extends PaginationQuery {
   category?: string;
   isActive?: boolean;
   minPrice?: number;

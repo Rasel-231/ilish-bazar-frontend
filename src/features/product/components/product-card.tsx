@@ -2,19 +2,18 @@ import Image from "next/image";
 
 import { cn, formatCurrency } from "@/lib/utils";
 
-import type { IProduct } from "../types/product.types";
+import type { Product } from "../types/product.types";
 
-export function ProductCard({
-  product,
-  className,
-}: {
-  product: IProduct;
+type ProductCardProps = {
+  product: Product;
   className?: string;
-}) {
+};
+
+export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl border border-foreground/10 transition-shadow hover:shadow-md",
+        "flex flex-col overflow-hidden transition-shadow hover:shadow-md",
         className,
       )}
     >
@@ -39,7 +38,7 @@ export function ProductCard({
         <div className="mt-auto flex items-center justify-between pt-3">
           <span className="font-semibold">{formatCurrency(product.price)}</span>
           <span className="text-xs text-foreground/60">
-            {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+            {product.stock > 0 ? `স্টকে ${product.stock}টি আছে` : "স্টকে নেই"}
           </span>
         </div>
       </div>

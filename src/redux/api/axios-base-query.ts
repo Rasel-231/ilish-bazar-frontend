@@ -1,19 +1,19 @@
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 
-export interface IApiErrorPayload {
+export interface ApiErrorPayload {
   success: false;
   message: string;
   statusCode?: number;
   errorDetails?: { path: string | number; message: string }[];
 }
 
-export interface IAxiosBaseQueryError {
+export interface AxiosBaseQueryError {
   status?: number;
-  data: IApiErrorPayload | { message: string };
+  data: ApiErrorPayload | { message: string };
 }
 
-export type TAxiosBaseQueryArgs = {
+export type AxiosBaseQueryArgs = {
   url: string;
   method?: AxiosRequestConfig["method"];
   data?: AxiosRequestConfig["data"];
@@ -24,7 +24,7 @@ export type TAxiosBaseQueryArgs = {
 export const axiosBaseQuery =
   (
     baseUrl = "",
-  ): BaseQueryFn<TAxiosBaseQueryArgs, unknown, IAxiosBaseQueryError> =>
+  ): BaseQueryFn<AxiosBaseQueryArgs, unknown, AxiosBaseQueryError> =>
   async ({ url, method = "GET", data, params, headers }) => {
     try {
       const result = await axios({
@@ -38,7 +38,7 @@ export const axiosBaseQuery =
 
       return { data: result.data };
     } catch (error) {
-      const axiosError = error as AxiosError<IApiErrorPayload>;
+      const axiosError = error as AxiosError<ApiErrorPayload>;
 
       return {
         error: {

@@ -1,35 +1,41 @@
 import type {
-  IPaginationQuery,
-  TOrderStatus,
-  TPaymentStatus,
-  TUserRole,
+  OrderStatus,
+  PaginationQuery,
+  PaymentMethod,
+  PaymentStatus,
+  UserRole,
 } from "@/types/common.types";
 
-export interface IOrderUser {
+export interface OrderUser {
   id: string;
   name: string;
   email: string;
-  role: TUserRole;
+  role: UserRole;
   avatarUrl?: string | null;
 }
 
-export interface IOrderItem {
+export interface OrderItem {
   id: string;
   orderId: string;
   productId: string;
   productName: string;
+  /** Optional thumbnail shown in order lists. */
+  productImage?: string | null;
+  /** Optional product slug for linking back to the product page. */
+  productSlug?: string | null;
   unitPrice: number | string;
   quantity: number;
   lineTotal: number | string;
   createdAt: string;
 }
 
-export interface IOrder {
+export interface Order {
   id: string;
   orderNumber: string;
   userId: string;
-  status: TOrderStatus;
-  paymentStatus: TPaymentStatus;
+  status: OrderStatus;
+  paymentStatus: PaymentStatus;
+  paymentMethod?: PaymentMethod;
   subtotal: number | string;
   shippingFee: number | string;
   totalAmount: number | string;
@@ -38,29 +44,29 @@ export interface IOrder {
   note?: string | null;
   createdAt: string;
   updatedAt: string;
-  user: IOrderUser;
-  items: IOrderItem[];
+  user: OrderUser;
+  items: OrderItem[];
 }
 
-export interface IOrderItemPayload {
+export interface OrderItemPayload {
   productId: string;
   quantity: number;
 }
 
-export interface ICreateOrderPayload {
-  items: IOrderItemPayload[];
+export interface CreateOrderPayload {
+  items: OrderItemPayload[];
   shippingAddress: string;
   phone: string;
   note?: string;
   shippingFee?: number;
 }
 
-export interface IUpdateOrderStatusPayload {
-  status: TOrderStatus;
+export interface UpdateOrderStatusPayload {
+  status: OrderStatus;
 }
 
-export interface IListOrdersQuery extends IPaginationQuery {
-  status?: TOrderStatus;
-  paymentStatus?: TPaymentStatus;
+export interface ListOrdersQuery extends PaginationQuery {
+  status?: OrderStatus;
+  paymentStatus?: PaymentStatus;
   userId?: string;
 }

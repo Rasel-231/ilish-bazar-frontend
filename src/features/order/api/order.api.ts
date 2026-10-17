@@ -1,41 +1,42 @@
-import { baseApi } from "@/redux/baseApi/baseApi";
-import type { IApiResponse, IPaginatedList } from "@/types/common.types";
+import { baseApi } from "@/redux/api/base-api";
+import { TagTypes } from "@/redux/types/tag-types";
+import type { ApiResponse, PaginatedList } from "@/types/common.types";
 
 import type {
-  ICreateOrderPayload,
-  IListOrdersQuery,
-  IOrder,
-  IUpdateOrderStatusPayload,
+  CreateOrderPayload,
+  ListOrdersQuery,
+  Order,
+  UpdateOrderStatusPayload,
 } from "../types/order.types";
 
-export const ordersApi = baseApi.injectEndpoints({
+export const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getOrders: builder.query<IPaginatedList<IOrder>, IListOrdersQuery | void>({
+    getOrders: builder.query<PaginatedList<Order>, ListOrdersQuery | void>({
       query: (params) => ({ url: "/orders", params: params ?? undefined }),
-      providesTags: ["Order"],
+      providesTags: [TagTypes.order],
     }),
-    getOrderById: builder.query<IApiResponse<IOrder>, string>({
+    getOrderById: builder.query<ApiResponse<Order>, string>({
       query: (id) => ({ url: `/orders/${id}` }),
-      providesTags: ["Order"],
+      providesTags: [TagTypes.order],
     }),
-    createOrder: builder.mutation<IApiResponse<IOrder>, ICreateOrderPayload>({
+    createOrder: builder.mutation<ApiResponse<Order>, CreateOrderPayload>({
       query: (body) => ({ url: "/orders", method: "POST", data: body }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: [TagTypes.order],
     }),
-    cancelOrder: builder.mutation<IApiResponse<IOrder>, string>({
+    cancelOrder: builder.mutation<ApiResponse<Order>, string>({
       query: (id) => ({ url: `/orders/${id}/cancel`, method: "POST" }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: [TagTypes.order],
     }),
     updateOrderStatus: builder.mutation<
-      IApiResponse<IOrder>,
-      { id: string; body: IUpdateOrderStatusPayload }
+      ApiResponse<Order>,
+      { id: string; body: UpdateOrderStatusPayload }
     >({
       query: ({ id, body }) => ({
         url: `/orders/${id}/status`,
         method: "PATCH",
         data: body,
       }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: [TagTypes.order],
     }),
   }),
 });
@@ -46,4 +47,4 @@ export const {
   useCreateOrderMutation,
   useCancelOrderMutation,
   useUpdateOrderStatusMutation,
-} = ordersApi;
+} = orderApi;

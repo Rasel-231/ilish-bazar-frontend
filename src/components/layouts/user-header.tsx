@@ -171,7 +171,7 @@ function DesktopNavLink({
 /* Header                                                                     */
 /* -------------------------------------------------------------------------- */
 
-export default function UserHeader({ cartCount = 0 }: UserHeaderProps) {
+export function UserHeader({ cartCount = 0 }: UserHeaderProps) {
   const pathname = usePathname() ?? "/";
   const router = useRouter();
 

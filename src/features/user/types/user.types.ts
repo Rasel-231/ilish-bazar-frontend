@@ -1,45 +1,45 @@
-import type { IPaginationQuery, TUserRole } from "@/types/common.types";
+import type { PaginationQuery, UserRole } from "@/types/common.types";
 
-export interface IUser {
+export interface User {
   id: string;
   email: string;
   name: string;
-  role: TUserRole;
+  role: UserRole;
   isActive: boolean;
   avatarUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface IRegisterPayload {
+export interface RegisterPayload {
   name: string;
   email: string;
   password: string;
 }
 
-export interface IUpdateProfilePayload {
+export interface UpdateProfilePayload {
   name?: string;
   email?: string;
   password?: string;
 }
 
-export interface ICreateUserPayload {
+export interface CreateUserPayload {
   name: string;
   email: string;
   password: string;
-  role?: TUserRole;
+  role?: UserRole;
   isActive?: boolean;
 }
 
-export interface IUpdateUserPayload {
+export interface UpdateUserPayload {
   name?: string;
   email?: string;
   password?: string;
-  role?: TUserRole;
+  role?: UserRole;
   isActive?: boolean;
 }
 
-export interface IListUsersQuery extends IPaginationQuery {
-  role?: TUserRole;
+export interface ListUsersQuery extends PaginationQuery {
+  role?: UserRole;
   isActive?: boolean;
 }

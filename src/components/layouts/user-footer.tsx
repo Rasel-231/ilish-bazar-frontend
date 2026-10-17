@@ -1,5 +1,17 @@
 import Link from "next/link";
+import { cacheLife } from "next/cache";
 import { Clock, Fish, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+
+/**
+ * Current year is cached so `new Date()` is never read during prerendering,
+ * which Next.js blocks unless the value is cached or rendered dynamically.
+ */
+async function getCurrentYear() {
+  "use cache";
+  cacheLife("days");
+
+  return new Date().getFullYear();
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Config – edit these values                                                */
@@ -10,7 +22,7 @@ const TAGLINE = "নদীর তাজা ইলিশ, সরাসরি জ�
 
 const CONTACT = {
   phone: "01604702974",
-  email: "ilishsupport@gmail.com", // TODO: আপনার ইমেইল দিন
+  email: "ilishsupport@gmail.com", // TODO: replace with the official support email
   address: "বাংলাদেশ",
   cutoff: "অর্ডার কাট-অফ: রাত ১০টা",
   tradeLicense: "",
@@ -35,9 +47,11 @@ const HELP_LINKS = [
 /*  Footer                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export default function UserFooter() {
+export async function UserFooter() {
+  const currentYear = await getCurrentYear();
+
   return (
-    <footer className="no-print mt-10 bg-navy text-white/80 sm:mt-16">
+    <footer className="no-print bg-navy text-white/80">
       <div className="container-page grid grid-cols-2 gap-x-6 gap-y-9 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
         {/* Brand */}
         <div className="col-span-2 space-y-4 sm:col-span-1">
@@ -138,7 +152,7 @@ export default function UserFooter() {
       <div className="border-t border-white/10">
         <div className="container-page flex flex-wrap items-center justify-between gap-2 py-4 font-bangla text-xs text-white/60">
           <p>
-            © {new Date().getFullYear()} {SITE_NAME}। সর্বস্বত্ব সংরক্ষিত।
+            © {currentYear} {SITE_NAME}। সর্বস্বত্ব সংরক্ষিত।
           </p>
           {CONTACT.tradeLicense && (
             <p>ট্রেড লাইসেন্স: {CONTACT.tradeLicense}</p>

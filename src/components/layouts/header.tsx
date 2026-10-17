@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/shared/container";
 import { Logo } from "@/components/shared/logo";
 
-const navItems = [
+const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Products" },
 ];
@@ -14,7 +14,7 @@ export function Header() {
       <Container className="flex h-16 items-center justify-between">
         <Logo />
         <nav className="flex items-center gap-6 text-sm">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}

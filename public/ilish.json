@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "slug": "mawa-ilish",
+    "name": "মাওয়ার ইলিশ",
+    "origin": "মাওয়া",
+    "weightRange": "৭০০–৯০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৮০০ গ্রাম",
+    "rating": 4.7,
+    "reviewCount": 70,
+    "pricePerKg": 1650,
+    "badge": "সেরা বিক্রি",
+    "fresh": true,
+    "tone": "blue",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "chandpur-ilish-1kg-plus",
+    "name": "চাঁদপুরের বড় ইলিশ",
+    "origin": "চাঁদপুর",
+    "weightRange": "১ কেজি+",
+    "pieceWeight": "পিস ≈ ১,০০০ গ্রাম",
+    "rating": 4.9,
+    "reviewCount": 63,
+    "pricePerKg": 2250,
+    "badge": "প্রিমিয়াম",
+    "fresh": true,
+    "tone": "sand",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "barishal-ilish",
+    "name": "বরিশালের ইলিশ",
+    "origin": "বরিশাল",
+    "weightRange": "৭০০–৯০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৮০০ গ্রাম",
+    "rating": 4.6,
+    "reviewCount": 67,
+    "pricePerKg": 1750,
+    "badge": null,
+    "fresh": true,
+    "tone": "green",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "chandpur-ilish-850",
+    "name": "চাঁদপুরের মাঝারি ইলিশ",
+    "origin": "চাঁদপুর",
+    "weightRange": "৭০০–৯০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৮৫০ গ্রাম",
+    "rating": 4.5,
+    "reviewCount": 38,
+    "pricePerKg": 1850,
+    "badge": "নতুন",
+    "fresh": true,
+    "tone": "sand",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "padma-ilish-1200",
+    "name": "পদ্মার বড় ইলিশ",
+    "origin": "পদ্মা",
+    "weightRange": "১.২ কেজি",
+    "pieceWeight": "পিস ≈ ১,২০০ গ্রাম",
+    "rating": 4.8,
+    "reviewCount": 24,
+    "pricePerKg": 2600,
+    "badge": "প্রিমিয়াম",
+    "fresh": true,
+    "tone": "blue",
+    "featured": false,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "bhola-ilish-600",
+    "name": "ভোলার ইলিশ",
+    "origin": "ভোলা",
+    "weightRange": "৫০০–৭০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৬০০ গ্রাম",
+    "rating": 4.3,
+    "reviewCount": 19,
+    "pricePerKg": 1400,
+    "badge": null,
+    "fresh": false,
+    "tone": "green",
+    "featured": false,
+    "inStock": false,
+    "images": [
+      "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "premium-chandpur-ilish",
+    "name": "চাঁদপুরের প্রিমিয়াম ইলিশ",
+    "origin": "চাঁদপুর",
+    "weightRange": "১.১–১.৩ কেজি",
+    "pieceWeight": "পিস ≈ ১,২০০ গ্রাম",
+    "rating": 4.9,
+    "reviewCount": 42,
+    "pricePerKg": 2450,
+    "badge": "প্রিমিয়াম",
+    "fresh": true,
+    "tone": "blue",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "coastal-fresh-ilish",
+    "name": "উপকূলের তাজা ইলিশ",
+    "origin": "উপকূলীয় অঞ্চল",
+    "weightRange": "৬০০–৮০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৭০০ গ্রাম",
+    "rating": 4.5,
+    "reviewCount": 31,
+    "pricePerKg": 1550,
+    "badge": "তাজা",
+    "fresh": true,
+    "tone": "green",
+    "featured": false,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "family-pack-ilish",
+    "name": "ফ্যামিলি প্যাক ইলিশ",
+    "origin": "বাংলাদেশ",
+    "weightRange": "৮০০ গ্রাম–১ কেজি",
+    "pieceWeight": "পিস ≈ ৯০০ গ্রাম",
+    "rating": 4.7,
+    "reviewCount": 55,
+    "pricePerKg": 1800,
+    "badge": "জনপ্রিয়",
+    "fresh": true,
+    "tone": "sand",
+    "featured": true,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "small-size-ilish",
+    "name": "ছোট সাইজের ইলিশ",
+    "origin": "বাংলাদেশ",
+    "weightRange": "৪০০–৬০০ গ্রাম",
+    "pieceWeight": "পিস ≈ ৫০০ গ্রাম",
+    "rating": 4.2,
+    "reviewCount": 18,
+    "pricePerKg": 1250,
+    "badge": null,
+    "fresh": true,
+    "tone": "green",
+    "featured": false,
+    "inStock": true,
+    "images": [
+      "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=1200"
+    ]
+  }
+]

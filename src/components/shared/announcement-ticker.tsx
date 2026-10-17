@@ -1,11 +1,11 @@
 import { Megaphone } from "lucide-react";
 import React from "react";
 
-interface AnnouncementTickerProps {
+type AnnouncementTickerProps = {
   notices: string[];
   className?: string;
   icon?: React.ReactNode;
-}
+};
 
 export function AnnouncementTicker({
   notices,

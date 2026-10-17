@@ -31,5 +31,5 @@ export const listUsersQuerySchema = z.object({
   sortOrder: z.enum(["asc", "desc"]).optional(),
 });
 
-export type TRegisterUserSchema = z.infer<typeof registerUserSchema>;
-export type TUpdateProfileSchema = z.infer<typeof updateProfileSchema>;
+export type RegisterUserSchema = z.infer<typeof registerUserSchema>;
+export type UpdateProfileSchema = z.infer<typeof updateProfileSchema>;
