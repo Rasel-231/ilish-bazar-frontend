@@ -36,7 +36,7 @@ export function TrafficSources({ sources }: TrafficSourcesProps) {
                 style={{ width: `${source.share}%` }}
               />
             </div>
-            <span className="w-20 shrink-0 text-right text-[11px] text-muted-foreground">
+            <span className="w-16 shrink-0 text-right text-[10px] text-muted-foreground sm:w-20 sm:text-[11px]">
               {toBanglaNumber(source.sessions)} সেশন
             </span>
           </div>

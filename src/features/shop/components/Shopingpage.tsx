@@ -220,7 +220,7 @@ export default function Shopingpage() {
             </p>
           </div>
 
-          <div className="mt-7 grid items-start gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
+          <div className="mt-7 grid items-start gap-6 lg:grid-cols-[16rem_minmax(0,1fr)]">
             <aside className="hidden self-start lg:sticky lg:top-24 lg:block">
               {filterPanel("shop")}
             </aside>
@@ -318,8 +318,8 @@ export default function Shopingpage() {
                   initial="hidden"
                   animate="show"
                   variants={GRID_VARIANTS}
-                  className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                >
+                className="grid grid-cols-1 gap-4 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              >
                   {visibleProducts.map((product) => (
                     <ShopProductCard
                       key={product.id}

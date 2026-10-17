@@ -97,16 +97,16 @@ export function CategoryDonut({ data }: CategoryDonutProps) {
               active === segment.index ? "bg-muted/60" : "hover:bg-muted/40",
             )}
           >
-            <span className="flex items-center gap-2.5">
+            <span className="flex min-w-0 items-center gap-2.5">
               <span
-                className="size-2.5 rounded-full"
+                className="size-2.5 shrink-0 rounded-full"
                 style={{ backgroundColor: segment.color }}
               />
-              <span className="font-bangla text-sm text-foreground/80">
+              <span className="truncate font-bangla text-sm text-foreground/80">
                 {segment.label}
               </span>
             </span>
-            <span className="text-sm font-bold text-navy">
+            <span className="shrink-0 text-sm font-bold text-navy">
               {toBanglaNumber(segment.value)}%
             </span>
           </li>

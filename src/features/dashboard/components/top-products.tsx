@@ -40,7 +40,7 @@ export function TopProducts({ products }: TopProductsProps) {
                 </span>
               </div>
 
-              <div className="mt-1.5 flex items-center gap-2">
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span className="inline-flex items-center gap-0.5 text-[11px] text-muted-foreground">
                   <Star className="size-3 fill-amber-400 text-amber-400" />
                   {toBanglaNumber(product.rating, { maximumFractionDigits: 1 })}
@@ -48,7 +48,7 @@ export function TopProducts({ products }: TopProductsProps) {
                 <span className="text-[11px] text-muted-foreground">
                   · {toBanglaNumber(product.sold)} কেজি বিক্রি
                 </span>
-                <span className={cn("ml-auto inline-flex items-center gap-1 text-[11px]", stock.text)}>
+                <span className={cn("ms-auto inline-flex items-center gap-1 text-[11px]", stock.text)}>
                   <span className={cn("size-1.5 rounded-full", stock.dot)} />
                   {stock.label}
                 </span>

@@ -80,30 +80,30 @@ export function DashboardOverview() {
                 variant="outline"
                 className="font-bangla rounded-xl border-border bg-white"
               >
-                <Calendar />
-                এ মাস
+                <Calendar className="size-4" />
+                <span className="hidden xs:inline">এ মাস</span>
               </Button>
               <Button
                 variant="outline"
                 className="font-bangla rounded-xl border-border bg-white"
               >
-                <RefreshCw />
-                রিফ্রেশ
+                <RefreshCw className="size-4" />
+                <span className="hidden xs:inline">রিফ্রেশ</span>
               </Button>
               <Button
                 variant="outline"
                 className="font-bangla rounded-xl border-border bg-white"
               >
-                <Download />
-                রিপোর্ট
+                <Download className="size-4" />
+                <span className="hidden xs:inline">রিপোর্ট</span>
               </Button>
               <Button
                 render={<Link href={ADMIN_ROUTES.products} />}
                 nativeButton={false}
                 className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
               >
-                <Plus />
-                নতুন পণ্য
+                <Plus className="size-4" />
+                <span className="hidden xs:inline">নতুন পণ্য</span>
               </Button>
             </>
           }
@@ -114,7 +114,7 @@ export function DashboardOverview() {
       <motion.section
         variants={item}
         aria-label="মূল পরিসংখ্যান"
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
       >
         {DASHBOARD_STATS.map((metric) => (
           <StatCard

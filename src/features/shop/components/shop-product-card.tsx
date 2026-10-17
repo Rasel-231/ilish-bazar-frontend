@@ -133,47 +133,49 @@ export function ShopProductCard({
         </div>
 
         <div className="mt-auto flex items-center gap-2 pt-1">
-          <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50/80 p-0.5">
-            <button
+          <div className="flex w-full flex-wrap items-center gap-2">
+            <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50/80 p-0.5">
+              <button
+                type="button"
+                onClick={onDecrement}
+                disabled={quantity <= 1}
+                aria-label={`${product.name} এর পরিমাণ কমান`}
+                className="grid size-7 place-items-center rounded-lg text-slate-500 transition-colors hover:bg-white hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-slate-500"
+              >
+                <Minus className="size-3.5" aria-hidden="true" />
+              </button>
+              <span className="min-w-6 text-center text-sm font-bold tabular-nums text-navy">
+                {toBnNumber(quantity)}
+              </span>
+              <button
+                type="button"
+                onClick={onIncrement}
+                aria-label={`${product.name} এর পরিমাণ বাড়ান`}
+                className="grid size-7 place-items-center rounded-lg text-slate-500 transition-colors hover:bg-white hover:text-navy"
+              >
+                <Plus className="size-3.5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <Button
               type="button"
-              onClick={onDecrement}
-              disabled={quantity <= 1}
-              aria-label={`${product.name} এর পরিমাণ কমান`}
-              className="grid size-7 place-items-center rounded-lg text-slate-500 transition-colors hover:bg-white hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-slate-500"
+              onClick={onAddToCart}
+              className="h-9 flex-1 min-w-[8rem] rounded-xl text-[13px] font-bold shadow-sm transition-transform active:translate-y-px"
             >
-              <Minus className="size-3.5" aria-hidden="true" />
-            </button>
-            <span className="min-w-6 text-center text-sm font-bold tabular-nums text-navy">
-              {toBnNumber(quantity)}
-            </span>
-            <button
+              এখনই কিনুন
+            </Button>
+
+            <Button
               type="button"
-              onClick={onIncrement}
-              aria-label={`${product.name} এর পরিমাণ বাড়ান`}
-              className="grid size-7 place-items-center rounded-lg text-slate-500 transition-colors hover:bg-white hover:text-navy"
+              variant="outline"
+              size="icon"
+              onClick={onAddToCart}
+              aria-label={`${product.name} কার্টে যোগ করুন`}
+              className="size-9 shrink-0 rounded-xl border-slate-200 text-navy hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
             >
-              <Plus className="size-3.5" aria-hidden="true" />
-            </button>
+              <ShoppingCart className="size-4" aria-hidden="true" />
+            </Button>
           </div>
-
-          <Button
-            type="button"
-            onClick={onAddToCart}
-            className="h-9 flex-1 rounded-xl text-[13px] font-bold shadow-sm transition-transform active:translate-y-px"
-          >
-            এখনই কিনুন
-          </Button>
-
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={onAddToCart}
-            aria-label={`${product.name} কার্টে যোগ করুন`}
-            className="size-9 shrink-0 rounded-xl border-slate-200 text-navy hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
-          >
-            <ShoppingCart className="size-4" aria-hidden="true" />
-          </Button>
         </div>
       </div>
     </motion.article>

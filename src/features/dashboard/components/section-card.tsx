@@ -24,7 +24,7 @@ export function SectionCard({
 }: SectionCardProps) {
   return (
     <Card className={cn("flex flex-col", className)}>
-      <CardHeader>
+      <CardHeader className="flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <h3 className="text-base font-semibold tracking-tight text-navy">
             {title}
@@ -33,7 +33,7 @@ export function SectionCard({
             <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
           ) : null}
         </div>
-        {action ? <div className="shrink-0">{action}</div> : null}
+        {action ? <div className="shrink-0 self-start sm:self-auto">{action}</div> : null}
       </CardHeader>
 
       <CardContent

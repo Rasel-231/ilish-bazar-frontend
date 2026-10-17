@@ -218,7 +218,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3 border-t border-border/60 pt-4">
+      <div className="mt-4 grid grid-cols-1 gap-3 border-t border-border/60 pt-4 sm:grid-cols-3">
         <MiniStat label="সর্বোচ্চ" value={formatValue(max)} />
         <MiniStat label="সর্বনিম্ন" value={formatValue(min)} />
         <MiniStat label="গড়" value={formatValue(Math.round(average))} />

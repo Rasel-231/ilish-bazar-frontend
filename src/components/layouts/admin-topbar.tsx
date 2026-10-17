@@ -37,7 +37,7 @@ export function AdminTopbar({ onOpenMobile }: AdminTopbarProps) {
         </div>
 
         {/* Search */}
-        <div className="relative mx-auto w-full max-w-md">
+        <div className="relative mx-auto hidden w-full max-w-md md:block">
           <Search
             aria-hidden="true"
             className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
@@ -58,7 +58,7 @@ export function AdminTopbar({ onOpenMobile }: AdminTopbarProps) {
         <div className="ms-auto flex shrink-0 items-center gap-1.5">
           <button
             type="button"
-            className="hidden h-9 items-center gap-1.5 rounded-xl bg-primary px-3 font-bangla text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 transition-all hover:bg-primary/90 active:scale-[0.97] sm:inline-flex"
+            className="hidden h-9 items-center gap-1.5 rounded-xl bg-primary px-3 font-bangla text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 transition-all hover:bg-primary/90 active:scale-[0.97] md:inline-flex"
           >
             <Plus className="size-4" />
             নতুন পণ্য
@@ -76,7 +76,7 @@ export function AdminTopbar({ onOpenMobile }: AdminTopbarProps) {
             <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-navy to-primary text-sm font-bold text-white">
               আ
             </span>
-            <span className="hidden flex-col items-start leading-tight xl:flex">
+            <span className="hidden flex-col items-start leading-tight lg:flex">
               <span className="font-bangla text-sm font-semibold text-navy">
                 আরিফুল ইসলাম
               </span>
