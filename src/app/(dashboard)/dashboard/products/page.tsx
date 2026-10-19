@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   title: "পণ্য ব্যবস্থাপনা",
 };
 
+const FILTERS = ["সব পণ্য", "একটিভ", "ইনঅ্যাকটিভ", "স্টক কম"] as const;
+
+function stockClasses(stock: number) {
+  if (stock <= 10) return "bg-red-100 text-red-700 ring-red-600/20";
+  if (stock > 0 && stock <= 25) return "bg-warning/10 text-warning ring-warning/30";
+  return "bg-success/10 text-success ring-success/30";
+}
+
 export default function ProductsPage() {
   return (
     <div className="flex flex-col gap-6">
@@ -23,6 +31,7 @@ export default function ProductsPage() {
           <>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <Download />
@@ -30,12 +39,16 @@ export default function ProductsPage() {
             </Button>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <Filter />
               ফিল্টার
             </Button>
-            <Button className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90">
+            <Button
+              size="lg"
+              className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
+            >
               <Plus />
               নতুন পণ্য
             </Button>
@@ -44,8 +57,8 @@ export default function ProductsPage() {
       />
 
       <div className="rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_rgba(11,37,64,0.04),0_12px_32px_-18px_rgba(11,37,64,0.18)]">
-        <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="relative w-full sm:max-w-sm">
+        <div className="flex flex-col gap-3 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative w-full lg:max-w-sm">
             <Search
               aria-hidden="true"
               className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
@@ -57,13 +70,13 @@ export default function ProductsPage() {
             />
           </div>
 
-          <div className="inline-flex flex-wrap items-center gap-2 text-xs font-medium">
-            {["সব পণ্য", "একটিভ", "ইনঅ্যাকটিভ", "স্টক কম"].map((label, index) => (
+          <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 text-xs font-medium sm:mx-0 sm:flex-wrap sm:px-0">
+            {FILTERS.map((label, index) => (
               <button
                 key={label}
                 type="button"
                 className={cn(
-                  "rounded-full px-3 py-1.5 transition-colors",
+                  "shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 transition-colors",
                   index === 0
                     ? "bg-navy text-white shadow-sm"
                     : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-navy",
@@ -75,7 +88,54 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile cards */}
+        <ul className="divide-y divide-border/60 border-t border-border/60 md:hidden">
+          {ADMIN_PRODUCTS.map((product) => (
+            <li key={product.id} className="flex flex-col gap-3 px-4 py-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 flex-col">
+                  <span className="font-bangla font-medium text-navy">
+                    {product.name}
+                  </span>
+                  <span className="mt-0.5 text-xs text-muted-foreground">
+                    {product.category} · {product.unit}
+                  </span>
+                </div>
+                <span
+                  className={cn(
+                    "inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 font-bangla text-xs font-semibold ring-1",
+                    stockClasses(product.stock),
+                  )}
+                >
+                  {toBanglaNumber(product.stock)} কেজি
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span className="font-semibold text-navy">
+                  {formatBanglaCurrency(product.price)}
+                </span>
+                <span className="font-bangla text-muted-foreground">
+                  {toBanglaNumber(product.sold)} বিক্রি
+                </span>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 font-bangla font-semibold",
+                    product.isActive
+                      ? "bg-success/10 text-success"
+                      : "bg-muted text-muted-foreground",
+                  )}
+                >
+                  {product.isActive ? "একটিভ" : "ইনঅ্যাকটিভ"}
+                </span>
+                <span className="font-semibold text-primary">সম্পাদনা</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop table */}
+        <div className="hidden overflow-x-auto border-t border-border/60 md:block">
           <table className="w-full min-w-[52rem] border-collapse text-left text-sm">
             <thead>
               <tr className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -89,57 +149,48 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {ADMIN_PRODUCTS.map((product) => {
-                const stockLow = product.stock <= 10;
-                const stockMid = product.stock > 0 && product.stock <= 25;
-
-                return (
-                  <tr
-                    key={product.id}
-                    className="group border-t border-border/60 transition-colors hover:bg-muted/40"
-                  >
-                    <td className="px-5 py-3.5">
-                      <span className="flex flex-col">
-                        <span className="font-bangla font-medium text-navy">
-                          {product.name}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {product.unit}
-                        </span>
+              {ADMIN_PRODUCTS.map((product) => (
+                <tr
+                  key={product.id}
+                  className="group border-t border-border/60 transition-colors hover:bg-muted/40"
+                >
+                  <td className="px-5 py-3.5">
+                    <span className="flex flex-col">
+                      <span className="font-bangla font-medium text-navy">
+                        {product.name}
                       </span>
-                    </td>
-                    <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
-                      {product.category}
-                    </td>
-                    <td className="px-5 py-3.5 font-semibold text-navy">
-                      {formatBanglaCurrency(product.price)}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span
-                        className={cn(
-                          "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1",
-                          stockLow
-                            ? "bg-red-100 text-red-700 ring-red-600/20"
-                            : stockMid
-                              ? "bg-warning/10 text-warning ring-warning/30"
-                              : "bg-success/10 text-success ring-success/30",
-                        )}
-                      >
-                        {toBanglaNumber(product.stock)} কেজি
+                      <span className="text-xs text-muted-foreground">
+                        {product.unit}
                       </span>
-                    </td>
-                    <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
-                      {toBanglaNumber(product.sold)} বিক্রি
-                    </td>
-                    <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
-                      {product.isActive ? "একটিভ" : "ইনঅ্যাকটিভ"}
-                    </td>
-                    <td className="px-5 py-3.5 text-right text-xs font-semibold text-primary">
-                      সম্পাদনা
-                    </td>
-                  </tr>
-                );
-              })}
+                    </span>
+                  </td>
+                  <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
+                    {product.category}
+                  </td>
+                  <td className="px-5 py-3.5 font-semibold text-navy">
+                    {formatBanglaCurrency(product.price)}
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <span
+                      className={cn(
+                        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1",
+                        stockClasses(product.stock),
+                      )}
+                    >
+                      {toBanglaNumber(product.stock)} কেজি
+                    </span>
+                  </td>
+                  <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
+                    {toBanglaNumber(product.sold)} বিক্রি
+                  </td>
+                  <td className="px-5 py-3.5 font-bangla text-xs text-muted-foreground">
+                    {product.isActive ? "একটিভ" : "ইনঅ্যাকটিভ"}
+                  </td>
+                  <td className="px-5 py-3.5 text-right text-xs font-semibold text-primary">
+                    সম্পাদনা
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

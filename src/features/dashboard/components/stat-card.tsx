@@ -94,7 +94,7 @@ export function StatCard({ metric, icon: Icon }: StatCardProps) {
         </span>
       </div>
 
-      <div className="relative mt-4 flex items-end justify-between gap-4">
+      <div className="relative mt-4 flex items-end justify-between gap-3">
         <div className="flex flex-col gap-1">
           <span
             className={cn(
@@ -114,7 +114,7 @@ export function StatCard({ metric, icon: Icon }: StatCardProps) {
 
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          className="h-10 w-[7.5rem] shrink-0 overflow-visible"
+          className="hidden h-10 w-[7.5rem] shrink-0 overflow-visible xs:block"
           preserveAspectRatio="none"
           aria-hidden="true"
         >

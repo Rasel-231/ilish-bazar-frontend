@@ -30,6 +30,7 @@ export default function AnalyticsPage() {
           <>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <Filter />
@@ -37,12 +38,16 @@ export default function AnalyticsPage() {
             </Button>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <RefreshCw />
               রিফ্রেশ
             </Button>
-            <Button className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90">
+            <Button
+              size="lg"
+              className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
+            >
               <Download />
               এক্সপোর্ট
             </Button>
@@ -50,11 +55,11 @@ export default function AnalyticsPage() {
         }
       />
 
-      <div className="grid gap-4 xl:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-3">
         <SectionCard
           title="আয় ও বিক্রয়ের ধারা"
           description="গত ১২ মাসের প্রবণতা"
-          className="xl:col-span-2"
+          className="lg:col-span-2"
         >
           <RevenueChart data={REVENUE_SERIES} />
         </SectionCard>
@@ -64,7 +69,7 @@ export default function AnalyticsPage() {
         </SectionCard>
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         <SectionCard
           title="অর্ডার অবস্থা"
           description="বিভাজন ও পরিমাণ"

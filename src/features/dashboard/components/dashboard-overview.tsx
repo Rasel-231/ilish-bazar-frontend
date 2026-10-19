@@ -78,6 +78,7 @@ export function DashboardOverview() {
             <>
               <Button
                 variant="outline"
+                size="lg"
                 className="font-bangla rounded-xl border-border bg-white"
               >
                 <Calendar className="size-4" />
@@ -85,6 +86,7 @@ export function DashboardOverview() {
               </Button>
               <Button
                 variant="outline"
+                size="lg"
                 className="font-bangla rounded-xl border-border bg-white"
               >
                 <RefreshCw className="size-4" />
@@ -92,6 +94,7 @@ export function DashboardOverview() {
               </Button>
               <Button
                 variant="outline"
+                size="lg"
                 className="font-bangla rounded-xl border-border bg-white"
               >
                 <Download className="size-4" />
@@ -100,6 +103,7 @@ export function DashboardOverview() {
               <Button
                 render={<Link href={ADMIN_ROUTES.products} />}
                 nativeButton={false}
+                size="lg"
                 className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
               >
                 <Plus className="size-4" />
@@ -126,14 +130,11 @@ export function DashboardOverview() {
       </motion.section>
 
       {/* Revenue + category split */}
-      <motion.div
-        variants={item}
-        className="grid gap-4 xl:grid-cols-3"
-      >
+      <motion.div variants={item} className="grid gap-4 lg:grid-cols-3">
         <SectionCard
           title="আয় ও অর্ডারের ধারা"
           description="মাসভিত্তিক পারফরম্যান্স"
-          className="xl:col-span-2"
+          className="lg:col-span-2"
         >
           <RevenueChart data={REVENUE_SERIES} />
         </SectionCard>
@@ -147,7 +148,7 @@ export function DashboardOverview() {
       </motion.div>
 
       {/* Orders status + traffic */}
-      <motion.div variants={item} className="grid gap-4 xl:grid-cols-3">
+      <motion.div variants={item} className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         <SectionCard
           title="অর্ডার অবস্থা"
           description="সব অর্ডারের বর্তমান বিভাজন"
@@ -155,10 +156,7 @@ export function DashboardOverview() {
           <OrdersStatusChart data={ORDERS_BY_STATUS} />
         </SectionCard>
 
-        <SectionCard
-          title="ট্রাফিক সোর্স"
-          description="গ্রাহক কোথা থেকে আসছে"
-        >
+        <SectionCard title="ট্রাফিক সোর্স" description="গ্রাহক কোথা থেকে আসছে">
           <TrafficSources sources={TRAFFIC_SOURCES} />
         </SectionCard>
 

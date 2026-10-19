@@ -19,7 +19,7 @@ function CardHeader({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-header"
-      className={cn("flex items-start justify-between gap-4 px-5 pt-5", className)}
+      className={cn("flex items-start justify-between gap-4 px-4 pt-4 sm:px-5 sm:pt-5", className)}
       {...props}
     />
   );
@@ -49,7 +49,7 @@ function CardContent({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-5 py-5", className)}
+      className={cn("px-4 py-4 sm:px-5 sm:py-5", className)}
       {...props}
     />
   );
@@ -59,7 +59,7 @@ function CardFooter({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center gap-3 px-5 pb-5", className)}
+      className={cn("flex items-center gap-3 px-4 pb-4 sm:px-5 sm:pb-5", className)}
       {...props}
     />
   );

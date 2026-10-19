@@ -23,75 +23,132 @@ const AVATAR_TONES = [
 
 export function RecentOrders({ orders }: RecentOrdersProps) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[42rem] border-collapse text-left text-sm">
-        <thead>
-          <tr className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            <th className="px-5 py-3 font-medium">গ্রাহক</th>
-            <th className="px-5 py-3 font-medium">অর্ডার</th>
-            <th className="px-5 py-3 font-medium">পরিমাণ</th>
-            <th className="px-5 py-3 font-medium">অবস্থা</th>
-            <th className="px-5 py-3 font-medium text-right">অ্যাকশন</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order, index) => (
-            <tr
-              key={order.id}
-              className="group border-t border-border/60 transition-colors hover:bg-muted/40"
-            >
-              <td className="px-5 py-3.5">
-                <div className="flex items-center gap-3">
+    <>
+      {/* Mobile cards */}
+      <ul className="divide-y divide-border/60 md:hidden">
+        {orders.map((order, index) => (
+          <li
+            key={order.id}
+            className="flex flex-col gap-3 px-4 py-4 transition-colors hover:bg-muted/40"
+          >
+            <div className="flex items-start gap-3">
+              <span
+                className={cn(
+                  "grid size-10 shrink-0 place-items-center rounded-full font-bangla text-xs font-bold",
+                  AVATAR_TONES[index % AVATAR_TONES.length],
+                )}
+              >
+                {getInitials(order.customer)}
+              </span>
+              <div className="flex min-w-0 flex-1 flex-col">
+                <span className="truncate font-bangla font-medium text-navy">
+                  {order.customer}
+                </span>
+                <span className="truncate text-xs text-muted-foreground">
+                  {order.email}
+                </span>
+              </div>
+              <button
+                type="button"
+                aria-label={`${order.orderNumber} অ্যাকশন`}
+                className="inline-grid size-8 shrink-0 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-navy"
+              >
+                <MoreHorizontal className="size-4" />
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="font-mono text-xs font-semibold text-foreground/80">
+                {order.orderNumber}
+              </span>
+              <span className="text-sm font-bold text-navy">
+                {formatBanglaCurrency(order.amount)}
+              </span>
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-bangla text-xs font-semibold ring-1",
+                  ORDER_STATUS_TONE[order.status],
+                )}
+              >
+                <span className="size-1.5 rounded-full bg-current" />
+                {ORDER_STATUS_LABELS[order.status]}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {/* Desktop table */}
+      <div className="hidden overflow-x-auto md:block">
+        <table className="w-full min-w-[42rem] border-collapse text-left text-sm">
+          <thead>
+            <tr className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              <th className="px-5 py-3 font-medium">গ্রাহক</th>
+              <th className="px-5 py-3 font-medium">অর্ডার</th>
+              <th className="px-5 py-3 font-medium">পরিমাণ</th>
+              <th className="px-5 py-3 font-medium">অবস্থা</th>
+              <th className="px-5 py-3 font-medium text-right">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order, index) => (
+              <tr
+                key={order.id}
+                className="group border-t border-border/60 transition-colors hover:bg-muted/40"
+              >
+                <td className="px-5 py-3.5">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "grid size-9 shrink-0 place-items-center rounded-full font-bangla text-xs font-bold",
+                        AVATAR_TONES[index % AVATAR_TONES.length],
+                      )}
+                    >
+                      {getInitials(order.customer)}
+                    </span>
+                    <span className="flex min-w-0 flex-col">
+                      <span className="truncate font-medium text-navy">
+                        {order.customer}
+                      </span>
+                      <span className="truncate text-xs text-muted-foreground">
+                        {order.email}
+                      </span>
+                    </span>
+                  </div>
+                </td>
+                <td className="px-5 py-3.5">
+                  <span className="font-mono text-xs font-semibold text-foreground/80">
+                    {order.orderNumber}
+                  </span>
+                </td>
+                <td className="px-5 py-3.5 font-semibold text-navy">
+                  {formatBanglaCurrency(order.amount)}
+                </td>
+                <td className="px-5 py-3.5">
                   <span
                     className={cn(
-                      "grid size-9 shrink-0 place-items-center rounded-full font-bangla text-xs font-bold",
-                      AVATAR_TONES[index % AVATAR_TONES.length],
+                      "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-bangla text-xs font-semibold ring-1",
+                      ORDER_STATUS_TONE[order.status],
                     )}
                   >
-                    {getInitials(order.customer)}
+                    <span className="size-1.5 rounded-full bg-current" />
+                    {ORDER_STATUS_LABELS[order.status]}
                   </span>
-                  <span className="flex min-w-0 flex-col">
-                    <span className="truncate font-medium text-navy">
-                      {order.customer}
-                    </span>
-                    <span className="truncate text-xs text-muted-foreground">
-                      {order.email}
-                    </span>
-                  </span>
-                </div>
-              </td>
-              <td className="px-5 py-3.5">
-                <span className="font-mono text-xs font-semibold text-foreground/80">
-                  {order.orderNumber}
-                </span>
-              </td>
-              <td className="px-5 py-3.5 font-semibold text-navy">
-                {formatBanglaCurrency(order.amount)}
-              </td>
-              <td className="px-5 py-3.5">
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-bangla text-xs font-semibold ring-1",
-                    ORDER_STATUS_TONE[order.status],
-                  )}
-                >
-                  <span className="size-1.5 rounded-full bg-current" />
-                  {ORDER_STATUS_LABELS[order.status]}
-                </span>
-              </td>
-              <td className="px-5 py-3.5 text-right">
-                <button
-                  type="button"
-                  aria-label={`${order.orderNumber} অ্যাকশন`}
-                  className="inline-grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-navy"
-                >
-                  <MoreHorizontal className="size-4" />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+                </td>
+                <td className="px-5 py-3.5 text-right">
+                  <button
+                    type="button"
+                    aria-label={`${order.orderNumber} অ্যাকশন`}
+                    className="inline-grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-navy"
+                  >
+                    <MoreHorizontal className="size-4" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

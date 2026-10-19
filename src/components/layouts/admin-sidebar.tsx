@@ -50,7 +50,7 @@ export function AdminSidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex flex-col bg-[linear-gradient(180deg,#0b2540_0%,#0a1c33_100%)] text-white shadow-2xl shadow-navy/30 transition-all duration-300 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex max-w-[85vw] flex-col bg-[linear-gradient(180deg,#0b2540_0%,#0a1c33_100%)] text-white shadow-2xl shadow-navy/30 transition-all duration-300 lg:sticky lg:top-0 lg:h-screen lg:max-w-none lg:translate-x-0",
           collapsed ? "w-20" : "w-72",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}

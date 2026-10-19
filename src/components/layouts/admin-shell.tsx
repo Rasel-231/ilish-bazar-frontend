@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
+import { AdminBottomNav } from "./admin-bottom-nav";
 import { AdminSidebar } from "./admin-sidebar";
 import { AdminTopbar } from "./admin-topbar";
 
@@ -31,7 +32,7 @@ export function AdminShell({ children }: AdminShellProps) {
   }, [mobileOpen]);
 
   return (
-    <div className="flex min-h-screen w-full bg-[#f6f8fb]">
+    <div className="flex min-h-dvh w-full bg-[#f6f8fb]">
       <AdminSidebar
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed((value) => !value)}
@@ -42,10 +43,14 @@ export function AdminShell({ children }: AdminShellProps) {
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminTopbar onOpenMobile={() => setMobileOpen(true)} />
 
-        <main className="flex flex-1 flex-col p-4 sm:p-6 lg:p-8">
-          <div className="mx-auto w-full max-w-[90rem]">{children}</div>
+        <main className="flex flex-1 flex-col p-4 pb-28 sm:p-6 sm:pb-28 lg:p-8 lg:pb-8">
+          <div className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col">
+            {children}
+          </div>
         </main>
       </div>
+
+      <AdminBottomNav onOpenMenu={() => setMobileOpen(true)} />
     </div>
   );
 }

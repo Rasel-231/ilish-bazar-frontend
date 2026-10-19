@@ -41,12 +41,16 @@ export default function CustomersPage() {
           <>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <Filter />
               ফিল্টার
             </Button>
-            <Button className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90">
+            <Button
+              size="lg"
+              className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
+            >
               <Plus />
               নতুন গ্রাহক
             </Button>
@@ -89,8 +93,8 @@ export default function CustomersPage() {
       </div>
 
       <div className="rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_rgba(11,37,64,0.04),0_12px_32px_-18px_rgba(11,37,64,0.18)]">
-        <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="relative w-full sm:max-w-sm">
+        <div className="flex flex-col gap-3 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative w-full lg:max-w-sm">
             <Search
               aria-hidden="true"
               className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
@@ -102,29 +106,29 @@ export default function CustomersPage() {
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 text-xs font-medium">
+          <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 text-xs font-medium sm:mx-0 sm:px-0">
             <button
               type="button"
-              className="rounded-full bg-navy px-3 py-1.5 text-white shadow-sm"
+              className="shrink-0 whitespace-nowrap rounded-full bg-navy px-3 py-1.5 text-white shadow-sm"
             >
               সকল
             </button>
             <button
               type="button"
-              className="rounded-full bg-muted/40 px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-navy"
+              className="shrink-0 whitespace-nowrap rounded-full bg-muted/40 px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-navy"
             >
               অ্যাডমিন
             </button>
             <button
               type="button"
-              className="rounded-full bg-muted/40 px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-navy"
+              className="shrink-0 whitespace-nowrap rounded-full bg-muted/40 px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-navy"
             >
               অ্যাকটিভ
             </button>
           </div>
         </div>
 
-        <div className="grid gap-3 p-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3 p-4 sm:p-5 md:grid-cols-2 xl:grid-cols-3">
           {ADMIN_CUSTOMERS.map((customer, index) => (
             <div
               key={customer.id}
@@ -184,12 +188,12 @@ export default function CustomersPage() {
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-muted/40 px-2 py-1">
-                  <Mail className="size-3.5" />
-                  {customer.email}
+                <span className="inline-flex min-w-0 max-w-full items-center gap-1.5 rounded-full bg-muted/40 px-2 py-1">
+                  <Mail className="size-3.5 shrink-0" />
+                  <span className="truncate">{customer.email}</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-muted/40 px-2 py-1">
-                  <Phone className="size-3.5" />
+                  <Phone className="size-3.5 shrink-0" />
                   +৮৮০ ১০০০০০০০০
                 </span>
               </div>

@@ -16,6 +16,16 @@ export const metadata: Metadata = {
   title: "অর্ডার ব্যবস্থাপনা",
 };
 
+const FILTERS = [
+  "সব",
+  "অপেক্ষমাণ",
+  "নিশ্চিত",
+  "প্রস্তুত",
+  "পথে",
+  "ডেলিভার্ড",
+  "বাতিল",
+] as const;
+
 export default function OrdersPage() {
   return (
     <div className="flex flex-col gap-6">
@@ -27,12 +37,16 @@ export default function OrdersPage() {
           <>
             <Button
               variant="outline"
+              size="lg"
               className="font-bangla rounded-xl border-border bg-white"
             >
               <Filter />
               ফিল্টার
             </Button>
-            <Button className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90">
+            <Button
+              size="lg"
+              className="font-bangla rounded-xl bg-primary shadow-sm shadow-primary/30 hover:bg-primary/90"
+            >
               <Plus />
               নতুন অর্ডার
             </Button>
@@ -41,8 +55,8 @@ export default function OrdersPage() {
       />
 
       <div className="rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_rgba(11,37,64,0.04),0_12px_32px_-18px_rgba(11,37,64,0.18)]">
-        <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="relative w-full sm:max-w-sm">
+        <div className="flex flex-col gap-3 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative w-full lg:max-w-sm">
             <Search
               aria-hidden="true"
               className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
@@ -54,15 +68,13 @@ export default function OrdersPage() {
             />
           </div>
 
-          <div className="inline-flex flex-wrap items-center gap-2 text-xs font-medium">
-            {(
-              ["সব", "অপেক্ষমাণ", "নিশ্চিত", "প্রস্তুত", "পথে", "ডেলিভার্ড", "বাতিল"] as const
-            ).map((label, index) => (
+          <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 text-xs font-medium sm:mx-0 sm:flex-wrap sm:px-0">
+            {FILTERS.map((label, index) => (
               <button
                 key={label}
                 type="button"
                 className={cn(
-                  "rounded-full px-3 py-1.5 transition-colors",
+                  "shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 transition-colors",
                   index === 0
                     ? "bg-navy text-white shadow-sm"
                     : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-navy",
@@ -74,7 +86,51 @@ export default function OrdersPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile cards */}
+        <ul className="divide-y divide-border/60 border-t border-border/60 md:hidden">
+          {ADMIN_ORDERS.map((order) => (
+            <li key={order.id} className="flex flex-col gap-3 px-4 py-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 flex-col">
+                  <span className="font-mono text-xs font-semibold text-foreground/80">
+                    {order.orderNumber}
+                  </span>
+                  <span className="mt-1 truncate font-medium text-navy">
+                    {order.customer}
+                  </span>
+                  <span className="truncate text-xs text-muted-foreground">
+                    {order.email}
+                  </span>
+                </div>
+                <span
+                  className={cn(
+                    "inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 font-bangla text-xs font-semibold ring-1",
+                    ORDER_STATUS_TONE[order.status],
+                  )}
+                >
+                  <span className="size-1.5 rounded-full bg-current" />
+                  {ORDER_STATUS_LABELS[order.status]}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span className="font-semibold text-navy">
+                  {formatBanglaCurrency(order.amount)}
+                </span>
+                <span className="font-bangla text-muted-foreground">
+                  পেমেন্ট: {order.paymentStatus}
+                </span>
+                <span className="font-bangla text-muted-foreground">
+                  {new Date(order.createdAt).toLocaleDateString("bn-BD")}
+                </span>
+                <span className="font-semibold text-primary">বিস্তারিত</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop table */}
+        <div className="hidden overflow-x-auto border-t border-border/60 md:block">
           <table className="w-full min-w-[50rem] border-collapse text-left text-sm">
             <thead>
               <tr className="text-xs font-medium uppercase tracking-wide text-muted-foreground">

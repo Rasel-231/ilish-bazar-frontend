@@ -118,7 +118,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
           ref={svgRef}
           viewBox={`-${PAD_X} -${PAD_Y} ${VIEW_W} ${VIEW_H}`}
           preserveAspectRatio="none"
-          className="h-64 w-full"
+          className="h-52 w-full sm:h-64"
           onMouseMove={handleMove}
           onMouseLeave={() => setHover(null)}
           role="img"
@@ -203,12 +203,13 @@ export function RevenueChart({ data }: RevenueChartProps) {
           </div>
         ) : null}
 
-        <div className="mt-2 flex items-center justify-between px-0.5">
+        <div className="mt-2 flex items-center justify-between gap-0.5 px-0.5">
           {data.map((point, index) => (
             <span
               key={point.label}
               className={cn(
                 "text-[10px] font-medium transition-colors sm:text-xs",
+                index % 2 !== 0 && "hidden sm:inline",
                 hover === index ? "text-navy" : "text-muted-foreground",
               )}
             >

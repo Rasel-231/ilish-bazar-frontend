@@ -73,18 +73,13 @@ export default function SettingsPage() {
               description={section.description}
               className="group cursor-pointer transition-shadow hover:shadow-[0_1px_2px_rgba(11,37,64,0.05),0_18px_36px_-20px_rgba(11,37,64,0.28)]"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between gap-4">
                 <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:-translate-y-0.5">
                   <Icon className="size-5" />
                 </span>
-                <div>
-                  <h4 className="text-base font-semibold text-navy">
-                    {section.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {section.description}
-                  </p>
-                </div>
+                <span className="font-bangla text-sm font-semibold text-primary">
+                  পরিচালনা করুন →
+                </span>
               </div>
             </SectionCard>
           );
@@ -105,7 +100,7 @@ export default function SettingsPage() {
               <label className="text-xs font-medium text-muted-foreground">
                 {field.label}
               </label>
-              <div className="h-10 rounded-xl border border-border/70 bg-muted/40 px-3 py-2 text-sm text-foreground/80">
+              <div className="flex min-h-10 items-center rounded-xl border border-border/70 bg-muted/40 px-3 py-2 text-sm text-foreground/80">
                 {field.value}
               </div>
             </div>

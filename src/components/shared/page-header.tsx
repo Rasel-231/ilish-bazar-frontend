@@ -30,7 +30,7 @@ export function PageHeader({
             {eyebrow}
           </span>
         ) : null}
-        <h1 className="mt-2 font-bangla text-2xl font-black tracking-tight text-navy sm:text-[1.75rem]">
+        <h1 className="mt-2 font-bangla text-xl font-black tracking-tight text-navy sm:text-[1.75rem]">
           {title}
         </h1>
         {description ? (
@@ -41,7 +41,9 @@ export function PageHeader({
       </div>
 
       {actions ? (
-        <div className="flex flex-wrap items-center gap-2">{actions}</div>
+        <div className="-mx-1 flex flex-wrap items-center gap-2 px-1 sm:mx-0 sm:px-0">
+          {actions}
+        </div>
       ) : null}
     </div>
   );
