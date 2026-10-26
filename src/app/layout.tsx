@@ -7,6 +7,7 @@ import "@fontsource/hind-siliguri/bengali-700.css";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
+import { CartSync } from "@/features/cart/components/cart-sync";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ReduxProvider } from "@/redux/providers/redux-provider";
 
@@ -40,7 +41,10 @@ export default function RootLayout({
   return (
     <html lang="bn" suppressHydrationWarning>
       <body className="min-h-dvh antialiased">
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <CartSync />
+          {children}
+        </ReduxProvider>
         <Toaster />
       </body>
     </html>

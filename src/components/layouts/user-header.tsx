@@ -11,8 +11,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Fish, LogIn, Search, ShoppingCart, X } from "lucide-react";
 
+import { selectCartCount } from "@/features/cart/store/cart-slice";
+import { toBnNumber } from "@/features/shop/utils/shop.utils";
 import { cn } from "@/lib/utils";
 import { MAIN_NAV_LINKS, ROUTES } from "@/lib/navigation";
+import { useAppSelector } from "@/redux/core/hooks";
 
 type UserHeaderProps = {
   /** Cart item count. Connect this prop to the Redux cart state when ready. */
@@ -171,9 +174,11 @@ function DesktopNavLink({
 /* Header                                                                     */
 /* -------------------------------------------------------------------------- */
 
-export function UserHeader({ cartCount = 0 }: UserHeaderProps) {
+export function UserHeader({ cartCount }: UserHeaderProps) {
   const pathname = usePathname() ?? "/";
   const router = useRouter();
+  const storeCartCount = useAppSelector(selectCartCount);
+  const itemsInCart = cartCount ?? storeCartCount;
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -291,13 +296,13 @@ export function UserHeader({ cartCount = 0 }: UserHeaderProps) {
 
             <Link
               href={ROUTES.cart}
-              aria-label={`কার্ট, ${cartCount}টি আইটেম`}
+              aria-label={`কার্ট, ${toBnNumber(itemsInCart)}টি আইটেম`}
               className="relative flex size-10 shrink-0 items-center justify-center rounded-xl text-navy transition-colors hover:bg-primary/10"
             >
               <ShoppingCart className="size-5" />
-              {cartCount > 0 && (
+              {itemsInCart > 0 && (
                 <span className="absolute right-1 top-1 flex min-w-[1.15rem] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold leading-[1.15rem] text-primary-foreground ring-2 ring-white">
-                  {cartCount > 99 ? "99+" : cartCount}
+                  {itemsInCart > 99 ? "৯৯+" : toBnNumber(itemsInCart)}
                 </span>
               )}
             </Link>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, MotionConfig } from "framer-motion";
 import {
   ChevronDown,
@@ -14,8 +16,11 @@ import { toast } from "react-toastify";
 import { EmptyState } from "@/components/feedback/empty-state";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { addItem, selectCartCount } from "@/features/cart/store/cart-slice";
+import { cartItemFromProduct } from "@/features/cart/utils/cart.utils";
+import { useAppDispatch, useAppSelector } from "@/redux/core/hooks";
 
-import { SHOP_PRODUCTS, SOURCE_LABELS } from "../data/shop-products";
+import { SOURCE_LABELS } from "../data/shop-products";
 import type {
   ShopProduct,
   ShopSizeKey,
@@ -50,27 +55,38 @@ const GRID_VARIANTS = {
   },
 };
 
-export default function Shopingpage() {
-  const [search, setSearch] = useState("");
+type ShopingpageProps = {
+  products: ShopProduct[];
+  initialSearch?: string;
+};
+
+export default function Shopingpage({
+  products,
+  initialSearch = "",
+}: ShopingpageProps) {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const cartCount = useAppSelector(selectCartCount);
+
+  const [search, setSearch] = useState(initialSearch);
   const [sources, setSources] = useState<ShopSourceKey[]>([]);
   const [sizes, setSizes] = useState<ShopSizeKey[]>([]);
   const [sort, setSort] = useState<ShopSortKey>("featured");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
-  const [cartCount, setCartCount] = useState(0);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const activeCount = sources.length + sizes.length;
 
   const searchedProducts = useMemo(() => {
     const term = search.trim().toLowerCase();
-    if (!term) return SHOP_PRODUCTS;
+    if (!term) return products;
 
-    return SHOP_PRODUCTS.filter((product) =>
-      `${product.name} ${product.origin} ${SOURCE_LABELS[product.source]} ${formatWeight(product.weightG)}`
+    return products.filter((product) =>
+      `${product.name} ${product.origin} ${SOURCE_LABELS[product.source]} ${product.weightRange} ${formatWeight(product.weightG)}`
         .toLowerCase()
         .includes(term),
     );
-  }, [search]);
+  }, [products, search]);
 
   const sourceCounts = useMemo(() => {
     const counts = { ...EMPTY_SOURCE_COUNTS };
@@ -138,23 +154,25 @@ export default function Shopingpage() {
   const addToCart = useCallback(
     (product: ShopProduct) => {
       const quantity = quantities[product.id] ?? 1;
-      setCartCount((count) => count + quantity);
+      dispatch(addItem(cartItemFromProduct(product, quantity)));
       toast.success(
         quantity > 1
-          ? `${toBnNumber(quantity)}টি ${product.name} কার্টে যোগ হয়েছে`
+          ? `${toBnNumber(quantity)} পিস ${product.name} কার্টে যোগ হয়েছে`
           : `${product.name} কার্টে যোগ হয়েছে`,
       );
     },
-    [quantities],
+    [dispatch, quantities],
   );
 
-  const showCartSummary = useCallback(() => {
-    if (cartCount > 0) {
-      toast.info(`আপনার কার্টে মোট ${toBnNumber(cartCount)}টি পণ্য আছে`);
-    } else {
-      toast.info("আপনার কার্ট এখনো খালি।");
-    }
-  }, [cartCount]);
+  const buyNow = useCallback(
+    (product: ShopProduct) => {
+      const quantity = quantities[product.id] ?? 1;
+      router.push(
+        `/checkout?buy=${encodeURIComponent(product.slug)}&qty=${quantity}`,
+      );
+    },
+    [quantities, router],
+  );
 
   const filterPanel = (idPrefix: string, className?: string) => (
     <ShopFilterPanel
@@ -182,12 +200,11 @@ export default function Shopingpage() {
           <header className="flex items-center justify-between gap-4">
             <Breadcrumb items={[{ label: "মাছ ইলিশ" }]} />
 
-            <button
-              type="button"
-              onClick={showCartSummary}
+            <Link
+              href="/cart"
               aria-label={
                 cartCount > 0
-                  ? `কার্ট দেখুন, মোট ${toBnNumber(cartCount)}টি পণ্য`
+                  ? `কার্ট দেখুন, মোট ${toBnNumber(cartCount)} পিস`
                   : "কার্ট দেখুন, কার্ট খালি"
               }
               className="relative grid size-10 shrink-0 place-items-center rounded-xl border border-slate-200 bg-white text-navy shadow-sm transition-colors hover:border-primary/40 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/40"
@@ -204,7 +221,7 @@ export default function Shopingpage() {
                   {toBnNumber(cartCount)}
                 </motion.span>
               )}
-            </button>
+            </Link>
           </header>
 
           <div className="mt-6 max-w-2xl sm:mt-7">
@@ -216,7 +233,8 @@ export default function Shopingpage() {
               তাজা ইলিশ
             </h1>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
-              ঘাট থেকে সরাসরি, ১০০% ফ্রেশ ডেলিভারি।
+              ঘাট থেকে সরাসরি, ১০০% ফ্রেশ ডেলিভারি। পছন্দের ইলিশ বেছে নিয়ে কার্টে
+              নিন অথবা সরাসরি অর্ডার করুন।
             </p>
           </div>
 
@@ -318,8 +336,8 @@ export default function Shopingpage() {
                   initial="hidden"
                   animate="show"
                   variants={GRID_VARIANTS}
-                className="grid grid-cols-1 gap-4 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              >
+                  className="grid grid-cols-1 gap-4 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                >
                   {visibleProducts.map((product) => (
                     <ShopProductCard
                       key={product.id}
@@ -328,6 +346,7 @@ export default function Shopingpage() {
                       onIncrement={() => changeQuantity(product.id, 1)}
                       onDecrement={() => changeQuantity(product.id, -1)}
                       onAddToCart={() => addToCart(product)}
+                      onBuyNow={() => buyNow(product)}
                     />
                   ))}
                 </motion.div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import {
   Check,
@@ -9,8 +10,10 @@ import {
   Scale,
   ShoppingCart,
   Star,
+  Zap,
 } from "lucide-react";
 
+import { ProductImage } from "@/components/shared/product-image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +26,6 @@ import {
   formatWeight,
   toBnNumber,
 } from "../utils/shop.utils";
-import { FishArt } from "./fish-art";
 
 const ART_BACKGROUND: Record<FishArtVariant, string> = {
   blue: "bg-art-blue",
@@ -46,6 +48,7 @@ export type ShopProductCardProps = {
   onIncrement: () => void;
   onDecrement: () => void;
   onAddToCart: () => void;
+  onBuyNow: () => void;
 };
 
 export function ShopProductCard({
@@ -54,7 +57,11 @@ export function ShopProductCard({
   onIncrement,
   onDecrement,
   onAddToCart,
+  onBuyNow,
 }: ShopProductCardProps) {
+  const detailHref = `/shop/${product.slug}`;
+  const outOfStock = !product.inStock;
+
   return (
     <motion.article
       variants={CARD_VARIANTS}
@@ -64,15 +71,19 @@ export function ShopProductCard({
       }}
       className="group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-3 shadow-[0_1px_2px_rgba(11,37,64,0.04),0_12px_28px_-18px_rgba(11,37,64,0.22)] transition-shadow duration-300 hover:shadow-[0_2px_4px_rgba(11,37,64,0.05),0_22px_44px_-22px_rgba(11,37,64,0.32)]"
     >
-      <div
+      <Link
+        href={detailHref}
+        aria-label={`${product.name} বিস্তারিত দেখুন`}
         className={cn(
           "relative mb-3 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl px-3",
           ART_BACKGROUND[product.art],
         )}
       >
-        <FishArt
-          variant={product.art}
-          className="max-w-[13rem] transition-transform duration-500 ease-out group-hover:scale-105"
+        <ProductImage
+          src={product.image}
+          alt={product.name}
+          sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 480px) 50vw, 100vw"
+          className="transition-transform duration-500 ease-out group-hover:scale-105"
         />
 
         <div className="absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5">
@@ -88,15 +99,23 @@ export function ShopProductCard({
 
         <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-emerald-600/95 px-2.5 py-1 text-[11px] font-bold text-white shadow-sm">
           <Check className="size-3" strokeWidth={3} aria-hidden="true" />
-          ফ্রেশ
+          {product.fresh ? "ফ্রেশ" : "স্টক সীমিত"}
         </span>
-      </div>
+
+        {outOfStock && (
+          <span className="absolute inset-0 grid place-items-center bg-navy/55 text-sm font-bold text-white backdrop-blur-[1px]">
+            স্টক শেষ
+          </span>
+        )}
+      </Link>
 
       <div className="flex flex-1 flex-col gap-2.5 px-1 pb-1">
         <div>
-          <h3 className="line-clamp-2 min-h-[2.75em] text-[15px] font-bold leading-snug text-navy">
-            {product.name}
-          </h3>
+          <Link href={detailHref}>
+            <h3 className="line-clamp-2 min-h-[2.75em] text-[15px] font-bold leading-snug text-navy transition-colors hover:text-primary">
+              {product.name}
+            </h3>
+          </Link>
           <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-500">
             <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
             <span className="truncate">{product.origin}</span>
@@ -132,8 +151,8 @@ export function ShopProductCard({
           <span className="text-xs font-medium text-slate-500">/ কেজি</span>
         </div>
 
-        <div className="mt-auto flex items-center gap-2 pt-1">
-          <div className="flex w-full flex-wrap items-center gap-2">
+        <div className="mt-auto space-y-2 pt-1">
+          <div className="flex items-center justify-between gap-2">
             <div className="flex items-center rounded-xl border border-slate-200 bg-slate-50/80 p-0.5">
               <button
                 type="button"
@@ -144,8 +163,8 @@ export function ShopProductCard({
               >
                 <Minus className="size-3.5" aria-hidden="true" />
               </button>
-              <span className="min-w-6 text-center text-sm font-bold tabular-nums text-navy">
-                {toBnNumber(quantity)}
+              <span className="min-w-8 text-center text-sm font-bold tabular-nums text-navy">
+                {toBnNumber(quantity)} পিস
               </span>
               <button
                 type="button"
@@ -157,23 +176,34 @@ export function ShopProductCard({
               </button>
             </div>
 
+            <Link
+              href={detailHref}
+              className="shrink-0 text-xs font-semibold text-primary underline-offset-2 hover:underline"
+            >
+              বিস্তারিত
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
             <Button
               type="button"
+              variant="outline"
               onClick={onAddToCart}
-              className="h-9 flex-1 min-w-[8rem] rounded-xl text-[13px] font-bold shadow-sm transition-transform active:translate-y-px"
+              disabled={outOfStock}
+              className="h-9 rounded-xl border-slate-200 text-[13px] font-bold text-navy transition-transform hover:border-primary/40 hover:bg-primary/5 hover:text-primary active:translate-y-px"
             >
-              এখনই কিনুন
+              <ShoppingCart className="size-4" aria-hidden="true" />
+              কার্টে নিন
             </Button>
 
             <Button
               type="button"
-              variant="outline"
-              size="icon"
-              onClick={onAddToCart}
-              aria-label={`${product.name} কার্টে যোগ করুন`}
-              className="size-9 shrink-0 rounded-xl border-slate-200 text-navy hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+              onClick={onBuyNow}
+              disabled={outOfStock}
+              className="h-9 rounded-xl text-[13px] font-bold shadow-sm transition-transform active:translate-y-px"
             >
-              <ShoppingCart className="size-4" aria-hidden="true" />
+              <Zap className="size-4" aria-hidden="true" />
+              এখনই কিনুন
             </Button>
           </div>
         </div>

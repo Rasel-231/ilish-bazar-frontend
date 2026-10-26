@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import Shopingpage from "@/features/shop/components/Shopingpage";
+import { SHOP_PRODUCTS } from "@/features/shop/data/shop-products";
 
 export const metadata: Metadata = {
   title: "তাজা ইলিশ",
@@ -9,6 +10,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
 };
 
-export default function ShopPage() {
-  return <Shopingpage />;
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string }>;
+}) {
+  const { search } = await searchParams;
+
+  return (
+    <Shopingpage products={SHOP_PRODUCTS} initialSearch={search ?? ""} />
+  );
 }

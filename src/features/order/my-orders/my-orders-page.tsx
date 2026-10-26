@@ -19,6 +19,10 @@ import { EmptyState } from "@/components/feedback/empty-state";
 import { ErrorState } from "@/components/feedback/error-state";
 import { OrderCard } from "@/features/order/my-orders/order-card";
 import type { Order, OrderItem } from "@/features/order/types/order.types";
+import {
+  readStoredOrders,
+  storedOrderToOrder,
+} from "@/features/checkout/utils/order-storage";
 import { ROUTES } from "@/lib/navigation";
 import { cn, formatCurrency } from "@/lib/utils";
 
@@ -84,11 +88,17 @@ export function MyOrdersPage() {
         }
 
         const result = (await response.json()) as OrdersResponse;
-        const list = Array.isArray(result.data) ? result.data : [];
+        const mockOrders = Array.isArray(result.data) ? result.data : [];
+        const localOrders = readStoredOrders().map(storedOrderToOrder);
+        const merged = new Map<string, Order>();
+
+        for (const order of [...localOrders, ...mockOrders]) {
+          merged.set(order.orderNumber, order);
+        }
 
         if (!cancelled) {
           setOrders(
-            [...list].sort(
+            [...merged.values()].sort(
               (a, b) =>
                 new Date(b.createdAt).getTime() -
                 new Date(a.createdAt).getTime(),

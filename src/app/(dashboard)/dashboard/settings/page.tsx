@@ -3,6 +3,7 @@ import {
   Bell,
   CreditCard,
   Globe,
+  Megaphone,
   Palette,
   ShieldCheck,
   Store,
@@ -10,6 +11,7 @@ import {
 
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionCard } from "@/features/dashboard/components/section-card";
+import { AnnouncementSettings } from "@/features/settings/components/announcement-settings";
 
 export const metadata: Metadata = {
   title: "সেটিংস",
@@ -62,6 +64,18 @@ export default function SettingsPage() {
         title="সিস্টেম সেটিংস"
         description="স্টোর কনফিগারেশন, পেমেন্ট, নিরাপত্তা ও ব্র্যান্ডিং ম্যানেজ করুন।"
       />
+
+      <SectionCard
+        title="নোটিশ বার (মার্কি) সেটিংস"
+        description="নেভিগেশনের উপরে চলমান গুরুত্বপূর্ণ নোটিশ এখান থেকে যোগ, সম্পাদনা ও প্রকাশ করুন।"
+        action={
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+            <Megaphone className="size-4.5" />
+          </span>
+        }
+      >
+        <AnnouncementSettings />
+      </SectionCard>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {SETTINGS_SECTIONS.map((section) => {

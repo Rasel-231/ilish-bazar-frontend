@@ -21,7 +21,7 @@ const VISIBLE_PACKAGING = 2;
 export function IlishShowcase({
   products = DEFAULT_ILISH_PRODUCTS,
   packaging = DEFAULT_PACKAGING,
-  viewAllHref = "/products",
+  viewAllHref = "/shop",
   onAddToCart,
   onBuyNow,
   onWishlistChange,

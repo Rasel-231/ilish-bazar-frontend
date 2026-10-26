@@ -1,4 +1,10 @@
-import type { ShopProduct, ShopSourceKey } from "../types/shop.types";
+import rawIlish from "../../../../public/ilish.json";
+
+import type {
+  FishArtVariant,
+  ShopProduct,
+  ShopSourceKey,
+} from "../types/shop.types";
 
 export const SOURCE_LABELS: Record<ShopSourceKey, string> = {
   sea: "সামুদ্রিক",
@@ -6,104 +12,79 @@ export const SOURCE_LABELS: Record<ShopSourceKey, string> = {
   barishal: "বরিশাল",
 };
 
-export const SHOP_PRODUCTS: ShopProduct[] = [
-  {
-    id: "mawa-ilish",
-    name: "মাওয়া ইলিশ",
-    origin: "মাওয়া ঘাট, নারায়ণগঞ্জ",
-    source: "farm",
-    weightG: 700,
-    pricePerKg: 1450,
-    rating: 4.9,
-    reviews: 128,
-    tag: "প্রিমিয়াম",
-    art: "blue",
-    popularity: 98,
-  },
-  {
-    id: "chandpur-ilish",
-    name: "চাঁদপুরের ইলিশ",
-    origin: "চাঁদপুর",
-    source: "sea",
-    weightG: 850,
-    pricePerKg: 1380,
-    rating: 4.8,
-    reviews: 96,
-    art: "green",
-    popularity: 95,
-  },
-  {
-    id: "barishal-ilish",
-    name: "বরিশালের ইলিশ",
-    origin: "বরিশাল",
-    source: "barishal",
-    weightG: 600,
-    pricePerKg: 1320,
-    rating: 4.7,
-    reviews: 74,
-    art: "yellow",
-    popularity: 92,
-  },
-  {
-    id: "nodi-ilish",
-    name: "নদীর ইলিশ",
-    origin: "শরীয়তপুর",
-    source: "farm",
-    weightG: 550,
-    pricePerKg: 1250,
-    rating: 4.6,
-    reviews: 58,
-    art: "blue",
-    popularity: 88,
-  },
-  {
-    id: "padma-ilish",
-    name: "পদ্মার ইলিশ",
-    origin: "পদ্মা, মাওয়া",
-    source: "farm",
-    weightG: 1100,
-    pricePerKg: 1550,
-    rating: 4.9,
-    reviews: 142,
-    tag: "প্রিমিয়াম",
-    art: "green",
-    popularity: 99,
-  },
-  {
-    id: "halishaghat-ilish",
-    name: "হালিশাঘাট ইলিশ",
-    origin: "বরিশাল",
-    source: "barishal",
-    weightG: 750,
-    pricePerKg: 1400,
-    rating: 4.5,
-    reviews: 41,
-    art: "yellow",
-    popularity: 80,
-  },
-  {
-    id: "kathalia-ilish",
-    name: "কাঁঠালিয়া ইলিশ",
-    origin: "ভোলা",
-    source: "sea",
-    weightG: 900,
-    pricePerKg: 1290,
-    rating: 4.6,
-    reviews: 67,
-    art: "blue",
-    popularity: 85,
-  },
-  {
-    id: "moya-ilish",
-    name: "মোয়া ইলিশ",
-    origin: "লালমোহন, চাঁদপুর",
-    source: "farm",
-    weightG: 650,
-    pricePerKg: 1500,
-    rating: 4.8,
-    reviews: 85,
-    tag: "রোকের",
-    art: "green",
-    popularity: 90,
-  },
-];
+const BN_DIGITS = "০১২৩৪৫৬৭৮৯";
+
+function bnToEn(value: string) {
+  return value.replace(/[০-৯]/g, (digit) => String(BN_DIGITS.indexOf(digit)));
+}
+
+function parseWeightInGrams(value: string) {
+  const normalized = bnToEn(value).replace(/,/g, "");
+
+  const kgMatch = normalized.match(/([\d.]+)\s*কেজি/);
+  if (kgMatch) return Math.round(Number(kgMatch[1]) * 1000);
+
+  const gramMatch = normalized.match(/([\d.]+)\s*গ্রাম/);
+  if (gramMatch) return Math.round(Number(gramMatch[1]));
+
+  return 500;
+}
+
+function sourceOf(origin: string): ShopSourceKey {
+  if (origin.includes("বরিশাল") || origin.includes("ভোলা")) return "barishal";
+  if (origin.includes("চাঁদপুর") || origin.includes("উপকূল")) return "sea";
+  return "farm";
+}
+
+function artOf(tone: string): FishArtVariant {
+  if (tone === "sand") return "yellow";
+  if (tone === "green") return "green";
+  return "blue";
+}
+
+export const SHOP_PRODUCTS: ShopProduct[] = rawIlish.map((item, index) => {
+  const images = item.images?.length
+    ? item.images
+    : [
+        "https://images.unsplash.com/photo-1572120151475-7446d705f83b?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      ];
+
+  return {
+    id: item.slug,
+    slug: item.slug,
+    name: item.name,
+    origin: item.origin,
+    source: sourceOf(item.origin),
+    weightG: parseWeightInGrams(item.pieceWeight),
+    weightRange: item.weightRange,
+    pieceWeight: item.pieceWeight,
+    pricePerKg: item.pricePerKg,
+    rating: item.rating,
+    reviews: item.reviewCount,
+    tag: item.badge ?? undefined,
+    art: artOf(item.tone),
+    popularity: Math.round(item.rating * 10 + item.reviewCount / 10 + index),
+    fresh: item.fresh,
+    inStock: item.inStock,
+    image: images[0],
+    images,
+  };
+});
+
+export function getShopProduct(slug: string) {
+  return SHOP_PRODUCTS.find((product) => product.slug === slug);
+}
+
+export function getRelatedProducts(product: ShopProduct, limit = 4) {
+  return SHOP_PRODUCTS.filter(
+    (item) =>
+      item.slug !== product.slug &&
+      (item.source === product.source || item.origin === product.origin),
+  )
+    .concat(SHOP_PRODUCTS.filter((item) => item.slug !== product.slug))
+    .filter(
+      (item, index, list) =>
+        list.findIndex((candidate) => candidate.slug === item.slug) === index,
+    )
+    .slice(0, limit);
+}

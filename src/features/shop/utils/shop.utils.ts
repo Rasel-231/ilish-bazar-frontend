@@ -12,6 +12,11 @@ export function toBnNumber(value: number | string): string {
   return String(value).replace(/\d/g, (digit) => BN_DIGITS[Number(digit)] ?? digit);
 }
 
+/** Convert Bengali digits typed by the customer back to English digits. */
+export function fromBnNumber(value: string): string {
+  return value.replace(/[০-৯]/g, (digit) => String(BN_DIGITS.indexOf(digit)));
+}
+
 export function formatTaka(amount: number): string {
   return `৳${toBnNumber(amount.toLocaleString("en-US"))}`;
 }
